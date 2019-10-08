@@ -4,4 +4,10 @@
     <color name="colorPrimaryDark">#C56936</color>
     <color name="colorAccent">#F68545</color>
     <color name="colorPlaceholder">#636363</color>
+
+    <color name="colorMainText">#000000</color>
+    <color name="colorSecondText">#7A7A7A</color>
+
+    <color name="colorHighPriority">#FC4040</color>
+
 </resources>
