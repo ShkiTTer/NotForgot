@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Not Forgot!</string>
+    <string name="list_placeholder">У вас пока нет дел.\nСчастливый вы человек!</string>
 </resources>
