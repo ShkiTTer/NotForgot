@@ -2,6 +2,11 @@
     <string name="app_name">Not Forgot!</string>
     <string name="list_placeholder">У вас пока нет дел.\nСчастливый вы человек!</string>
     <string name="btn_edit">Редактировать</string>
+    <string name="title_login">Вход</string>
+    <string name="title_registration">Регистрация</string>
+
+    <string name="hint_mail">E-mail</string>
+    <string name="hint_password">Пароль</string>
 
     <string name="hint_input_category">Название категории</string>
 
