@@ -7,6 +7,11 @@
 
     <string name="hint_mail">E-mail</string>
     <string name="hint_password">Пароль</string>
+    <string name="hint_name">Имя</string>
+    <string name="hint_repeat_password">Повторите пароль</string>
+
+    <string name="btn_finished_registration">Зарегистрироваться</string>
+    <string name="btn_cancel_registration">Войти</string>
 
     <string name="hint_input_category">Название категории</string>
 
