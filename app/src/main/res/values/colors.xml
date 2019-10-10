@@ -10,6 +10,8 @@
     <color name="colorGrayText">#7A7A7A</color>
     <color name="colorLightBlackText">#636363</color>
 
+    <color name="colorTextFieldBg">#f3f3f3</color>
+
     <color name="colorTaskDone">#06B003</color>
     <color name="colorTaskNotDone">#F71919</color>
     

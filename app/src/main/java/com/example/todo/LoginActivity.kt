@@ -11,11 +11,15 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.AppTheme)
+        setTheme(R.style.AppTheme_NoActionBar)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         binding.apply {
             lifecycleOwner = this@LoginActivity
         }
+
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragmentContainer, LoginFragment.newInstance())
+            .commit()
     }
 }
