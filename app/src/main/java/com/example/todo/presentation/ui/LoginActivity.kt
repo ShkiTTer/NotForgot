@@ -1,8 +1,9 @@
-package com.example.todo
+package com.example.todo.presentation.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.example.todo.R
 import com.example.todo.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -19,7 +20,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragmentContainer, LoginFragment.newInstance())
+            .add(
+                R.id.fragmentContainer,
+                LoginFragment.newInstance()
+            )
             .commit()
     }
 }
