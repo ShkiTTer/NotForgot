@@ -25,6 +25,10 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
+            app:boxBackgroundColor="@color/colorTextFieldBg"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
             android:id="@+id/textInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -42,10 +46,15 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_name"
                 android:inputType="textEmailAddress"
+                android:paddingStart="8dp"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            app:boxBackgroundColor="@color/colorTextFieldBg"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
             android:id="@+id/textInputLayout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -63,10 +72,15 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_mail"
                 android:inputType="textEmailAddress"
+                android:paddingStart="8dp"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            app:boxBackgroundColor="@color/colorTextFieldBg"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
             android:id="@+id/textInputLayout3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -84,10 +98,15 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_password"
                 android:inputType="textEmailAddress"
+                android:paddingStart="8dp"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            app:boxBackgroundColor="@color/colorTextFieldBg"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
             android:id="@+id/textInputLayout4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -105,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_repeat_password"
                 android:inputType="textEmailAddress"
+                android:paddingStart="8dp"
                 android:singleLine="true" />
         </com.google.android.material.textfield.TextInputLayout>
 
