@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.example.todo.R
 import com.example.todo.databinding.FragmentRegistrationBinding
 import com.example.todo.presentation.viewmodel.RegisterViewModel
@@ -31,6 +32,10 @@ class RegistrationFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             newUser = registerViewModel.newUser
         }
+
+        registerViewModel.newUser.observe(viewLifecycleOwner, Observer {
+            println(it)
+        })
 
         return binding.root
     }

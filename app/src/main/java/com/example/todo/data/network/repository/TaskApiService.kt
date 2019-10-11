@@ -8,6 +8,6 @@ import retrofit2.http.POST
 
 interface TaskApiService {
     @Headers("Accept: application/json")
-    @POST("/register")
+    @POST("register/")
     fun registerUser(@Body registerUser: RegisterUser): User
 }
