@@ -45,7 +45,8 @@
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12">
+            app:layout_constraintTop_toBottomOf="@+id/textView12"
+            app:error="@{newUser.name == ``}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -53,7 +54,8 @@
                 android:hint="@string/hint_name"
                 android:inputType="textEmailAddress"
                 android:paddingStart="8dp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="@={newUser.name}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -71,7 +73,8 @@
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+            app:error="@{newUser.email == ``}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -79,7 +82,8 @@
                 android:hint="@string/hint_mail"
                 android:inputType="textEmailAddress"
                 android:paddingStart="8dp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="@={newUser.email}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -97,7 +101,8 @@
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+            app:error="@{newUser.password}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -105,7 +110,8 @@
                 android:hint="@string/hint_password"
                 android:inputType="textEmailAddress"
                 android:paddingStart="8dp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="@={newUser.password}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -123,7 +129,8 @@
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+            app:error="@{newUser.confirmPassword == ``}">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -131,11 +138,12 @@
                 android:hint="@string/hint_repeat_password"
                 android:inputType="textEmailAddress"
                 android:paddingStart="8dp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="@={newUser.confirmPassword}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnRegister"
             style="@style/AccentButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -146,14 +154,16 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/btnLogIn"
             style="@style/GrayButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/btn_cancel_registration"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button4" />
+            app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

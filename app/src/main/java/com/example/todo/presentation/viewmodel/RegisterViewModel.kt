@@ -14,7 +14,7 @@ class RegisterViewModel(private val registerUseCase: RegisterUseCase) : ViewMode
     val user: LiveData<User>
         get() = mUser
 
-    val newUser = MutableLiveData<NewUser>()
+    var newUser = MutableLiveData(NewUser())
 
     fun registerUser() {
         registerUseCase.apply {
