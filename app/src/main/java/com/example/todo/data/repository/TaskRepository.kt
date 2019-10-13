@@ -6,7 +6,7 @@ import com.example.todo.domain.entity.User
 import com.example.todo.domain.repository.ITaskRepository
 
 class TaskRepository(private val networkRepository: INetworkRepository) : ITaskRepository {
-    override fun registerUser(newUser: NewUser): User {
+    override suspend fun registerUser(newUser: NewUser): User {
         return NetworkMapper.userFromNetwork(
             networkRepository.registerUser(
                 NetworkMapper.newUserToNetwork(

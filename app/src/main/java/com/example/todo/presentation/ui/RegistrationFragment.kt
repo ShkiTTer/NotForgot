@@ -1,6 +1,7 @@
 package com.example.todo.presentation.ui
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.todo.R
 import com.example.todo.databinding.FragmentRegistrationBinding
+import com.example.todo.presentation.common.PresentationConstants
 import com.example.todo.presentation.viewmodel.RegisterViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -34,11 +36,40 @@ class RegistrationFragment : Fragment() {
             newUser = registerViewModel.newUser
         }
 
+        setupClickListeners()
+        initObservers()
+
+        return binding.root
+    }
+
+    private fun showError() {
+
+    }
+
+    private fun initObservers() {
         registerViewModel.newUser.observe(viewLifecycleOwner, Observer {
             Log.d("D", it.toString())
         })
 
-        return binding.root
+        registerViewModel.user.observe(viewLifecycleOwner, Observer {
+            println(it)
+            if (it != null) {
+                val intent = Intent(activity, MainActivity::class.java)
+                intent.putExtra(PresentationConstants.EXTRA_TOKEN, it.token)
+                startActivity(intent)
+
+                activity?.finish()
+            }
+            else {
+                showError()
+            }
+        })
+    }
+
+    private fun setupClickListeners() {
+        binding.btnRegister.setOnClickListener {
+            registerViewModel.registerUser()
+        }
     }
 
     companion object {

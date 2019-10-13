@@ -4,5 +4,5 @@ import com.example.todo.data.network.entity.RegisterUser
 import com.example.todo.data.network.entity.User
 
 interface INetworkRepository {
-    fun registerUser(registerUser: RegisterUser): User
+    suspend fun registerUser(registerUser: RegisterUser): User
 }
