@@ -11,5 +11,6 @@ object BindingAdapter {
         if (isError) {
             textInputLayout.error = textInputLayout.context.getString(R.string.error_empty_field)
         }
+        else textInputLayout.error = null
     }
 }

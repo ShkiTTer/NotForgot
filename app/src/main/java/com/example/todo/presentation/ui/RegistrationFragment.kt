@@ -2,6 +2,7 @@ package com.example.todo.presentation.ui
 
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +35,7 @@ class RegistrationFragment : Fragment() {
         }
 
         registerViewModel.newUser.observe(viewLifecycleOwner, Observer {
-            println(it)
+            Log.d("D", it.toString())
         })
 
         return binding.root
