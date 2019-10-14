@@ -11,7 +11,7 @@ object NetworkMapper {
         newUser.password
     )
 
-    fun userFromNetwork(userToken: UserToken): com.example.todo.domain.entity.UserToken =
+    fun userTokenFromNetwork(userToken: UserToken): com.example.todo.domain.entity.UserToken =
         com.example.todo.domain.entity.UserToken(
             userToken.token
         )

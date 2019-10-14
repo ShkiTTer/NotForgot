@@ -4,7 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".presentation.ui.LoginFragment">
 
+    <data>
+        <import type="com.example.todo.presentation.common.ObservableLiveData"/>
 
+        <variable
+            name="loginUser"
+            type="ObservableLiveData&lt;com.example.todo.presentation.entity.LoginUser>" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -49,7 +55,8 @@
                 android:hint="@string/hint_mail"
                 android:inputType="textEmailAddress"
                 android:paddingStart="8dp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="@={loginUser.email}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -75,7 +82,8 @@
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:paddingStart="8dp"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:text="@={loginUser.password}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

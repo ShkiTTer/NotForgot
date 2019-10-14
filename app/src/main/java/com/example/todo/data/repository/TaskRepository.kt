@@ -4,13 +4,17 @@ import android.content.Context
 import com.example.todo.Constants.SHARED_PREFERENCES_NAME
 import com.example.todo.Constants.SHARED_PREFERENCES_TOKEN
 import com.example.todo.data.mapper.NetworkMapper
+import com.example.todo.domain.entity.LoginUser
 import com.example.todo.domain.entity.NewUser
 import com.example.todo.domain.entity.UserToken
 import com.example.todo.domain.repository.ITaskRepository
 
-class TaskRepository(private val networkRepository: INetworkRepository, private val context: Context) : ITaskRepository {
+class TaskRepository(
+    private val networkRepository: INetworkRepository,
+    private val context: Context
+) : ITaskRepository {
     override suspend fun registerUser(newUser: NewUser): UserToken {
-        return NetworkMapper.userFromNetwork(
+        return NetworkMapper.userTokenFromNetwork(
             networkRepository.registerUser(
                 NetworkMapper.newUserToNetwork(
                     newUser
@@ -33,4 +37,7 @@ class TaskRepository(private val networkRepository: INetworkRepository, private 
 
         return prefs.getString(SHARED_PREFERENCES_TOKEN, null)
     }
+
+    override suspend fun login(loginUser: LoginUser): UserToken =
+        NetworkMapper.userTokenFromNetwork(networkRepository.login(loginUser))
 }

@@ -2,6 +2,7 @@ package com.example.todo.data.network.repository
 
 import com.example.todo.data.network.entity.RegisterUser
 import com.example.todo.data.network.entity.UserToken
+import com.example.todo.domain.entity.LoginUser
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers
@@ -11,4 +12,8 @@ interface TaskApiService {
     @Headers("Accept: application/json")
     @POST("register")
     fun registerUser(@Body registerUser: RegisterUser): Call<UserToken>
+
+    @Headers("Accept: application/json")
+    @POST("login")
+    fun login(@Body loginUser: LoginUser): Call<UserToken>
 }
