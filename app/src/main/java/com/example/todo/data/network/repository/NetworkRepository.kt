@@ -1,5 +1,6 @@
 package com.example.todo.data.network.repository
 
+import com.example.todo.data.DataConstants
 import com.example.todo.data.network.entity.RegisterUser
 import com.example.todo.data.network.entity.UserToken
 import com.example.todo.data.repository.INetworkRepository
@@ -14,5 +15,6 @@ class NetworkRepository(private val taskApiService: TaskApiService) : INetworkRe
     override suspend fun login(loginUser: LoginUser): UserToken =
         taskApiService.login(loginUser).await()
 
-    override suspend fun getTasks(token: String): List<Task> = taskApiService.getTasks(token)
+    override suspend fun getTasks(token: String): List<Task> =
+        taskApiService.getTasks("${DataConstants.TOKEN_HEADER} $token").await()
 }

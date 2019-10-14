@@ -16,7 +16,7 @@ interface TaskApiService {
     @POST("login")
     fun login(@Body loginUser: LoginUser): Call<UserToken>
 
-    @Headers("Accept: application/json", "")
+    @Headers("Accept: application/json")
     @GET("tasks")
-    fun getTasks(@Header("Authorization") token: String): List<Task>
+    fun getTasks(@Header("Authorization") token: String): Call<List<Task>>
 }
