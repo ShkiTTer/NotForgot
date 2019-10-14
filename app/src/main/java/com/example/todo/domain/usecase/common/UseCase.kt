@@ -13,17 +13,17 @@ abstract class UseCase<T>: CoroutineScope {
 
     protected abstract suspend fun doInBackground(): T?
 
-    fun execute(callback: Callback<T>) {
+    fun execute(callback: Callback<T>? = null) {
         launch(coroutineContext) {
             try {
                 val result = withContext(backgroundContext) {
                     doInBackground()
                 }
 
-                callback.onComplete(result)
+                callback?.onComplete(result)
             }
             catch (t: Throwable) {
-                callback.onError(t)
+                callback?.onError(t)
             }
         }
     }
