@@ -3,10 +3,9 @@ package com.example.todo.data.network.repository
 import com.example.todo.data.network.entity.RegisterUser
 import com.example.todo.data.network.entity.UserToken
 import com.example.todo.domain.entity.LoginUser
+import com.example.todo.domain.entity.Task
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface TaskApiService {
     @Headers("Accept: application/json")
@@ -16,4 +15,8 @@ interface TaskApiService {
     @Headers("Accept: application/json")
     @POST("login")
     fun login(@Body loginUser: LoginUser): Call<UserToken>
+
+    @Headers("Accept: application/json", "")
+    @GET("tasks")
+    fun getTasks(@Header("Authorization") token: String): List<Task>
 }

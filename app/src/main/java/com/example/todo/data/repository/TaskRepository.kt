@@ -6,6 +6,7 @@ import com.example.todo.Constants.SHARED_PREFERENCES_TOKEN
 import com.example.todo.data.mapper.NetworkMapper
 import com.example.todo.domain.entity.LoginUser
 import com.example.todo.domain.entity.NewUser
+import com.example.todo.domain.entity.Task
 import com.example.todo.domain.entity.UserToken
 import com.example.todo.domain.repository.ITaskRepository
 
@@ -40,4 +41,7 @@ class TaskRepository(
 
     override suspend fun login(loginUser: LoginUser): UserToken =
         NetworkMapper.userTokenFromNetwork(networkRepository.login(loginUser))
+
+    override suspend fun getTasks(token: String): List<Task> =
+        networkRepository.getTasks(token)
 }
