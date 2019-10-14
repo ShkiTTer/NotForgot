@@ -10,6 +10,7 @@ import com.example.todo.domain.usecase.GetTokenUseCase
 import com.example.todo.domain.usecase.LoginUseCase
 import com.example.todo.domain.usecase.RegisterUseCase
 import com.example.todo.domain.usecase.SaveTokenUseCase
+import com.example.todo.presentation.viewmodel.AutoLoginViewModel
 import com.example.todo.presentation.viewmodel.LoginViewModel
 import com.example.todo.presentation.viewmodel.RegisterViewModel
 import org.koin.android.ext.koin.androidContext
@@ -30,6 +31,7 @@ class TodoApp : Application() {
 
         viewModel { RegisterViewModel(get(), get()) }
         viewModel { LoginViewModel(get(), get()) }
+        viewModel { AutoLoginViewModel(get()) }
     }
 
     override fun onCreate() {
