@@ -47,10 +47,6 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun initObservers() {
-        registerViewModel.newUser.observe(viewLifecycleOwner, Observer {
-            Log.d("D", it.toString())
-        })
-
         registerViewModel.user.observe(viewLifecycleOwner, Observer {
             println(it)
             if (it != null) {

@@ -5,7 +5,10 @@
     tools:context=".presentation.ui.RegistrationFragment">
 
     <data>
-        <import type="com.example.todo.presentation.common.ObservableLiveData"/>
+
+        <import type="com.example.todo.presentation.common.ObservableLiveData" />
+
+        <import type="com.example.todo.presentation.utils.RegistrationFormValidate" />
 
         <variable
             name="newUser"
@@ -31,22 +34,22 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
-            app:boxBackgroundColor="@color/colorTextFieldBg"
-            app:boxBackgroundMode="filled"
-            app:boxCornerRadiusTopEnd="4dp"
-            app:boxCornerRadiusTopStart="4dp"
             android:id="@+id/textInputLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            app:boxBackgroundColor="@color/colorTextFieldBg"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
+            app:error="@{newUser.name == `` ? @string/error_empty_field : null}"
             app:errorEnabled="true"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12"
-            app:error="@{newUser.name == ``}">
+            app:layout_constraintTop_toBottomOf="@+id/textView12">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -55,26 +58,26 @@
                 android:inputType="textEmailAddress"
                 android:paddingStart="8dp"
                 android:singleLine="true"
-                android:text="@={newUser.name}"/>
+                android:text="@={newUser.name}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            app:boxBackgroundColor="@color/colorTextFieldBg"
-            app:boxBackgroundMode="filled"
-            app:boxCornerRadiusTopEnd="4dp"
-            app:boxCornerRadiusTopStart="4dp"
             android:id="@+id/textInputLayout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            app:boxBackgroundColor="@color/colorTextFieldBg"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
+            app:error="@{!RegistrationFormValidate.INSTANCE.validateEmail(newUser.email) ? @string/error_bad_mail : null}"
             app:errorEnabled="true"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
-            app:error="@{newUser.email == ``}">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -83,26 +86,26 @@
                 android:inputType="textEmailAddress"
                 android:paddingStart="8dp"
                 android:singleLine="true"
-                android:text="@={newUser.email}"/>
+                android:text="@={newUser.email}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            app:boxBackgroundColor="@color/colorTextFieldBg"
-            app:boxBackgroundMode="filled"
-            app:boxCornerRadiusTopEnd="4dp"
-            app:boxCornerRadiusTopStart="4dp"
             android:id="@+id/textInputLayout3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            app:boxBackgroundColor="@color/colorTextFieldBg"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
+            app:error="@{!RegistrationFormValidate.INSTANCE.validatePasswordLength(newUser.password) ? @string/error_short_password : null}"
             app:errorEnabled="true"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-            app:error="@{newUser.password == ``}">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -111,26 +114,26 @@
                 android:inputType="textEmailAddress"
                 android:paddingStart="8dp"
                 android:singleLine="true"
-                android:text="@={newUser.password}"/>
+                android:text="@={newUser.password}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            app:boxBackgroundColor="@color/colorTextFieldBg"
-            app:boxBackgroundMode="filled"
-            app:boxCornerRadiusTopEnd="4dp"
-            app:boxCornerRadiusTopStart="4dp"
             android:id="@+id/textInputLayout4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            app:boxBackgroundColor="@color/colorTextFieldBg"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
+            app:error="@{!RegistrationFormValidate.INSTANCE.validatePasswordConfirmation(newUser.password, newUser.confirmPassword) ? @string/error_password_not_confirm : null}"
             app:errorEnabled="true"
             app:hintAnimationEnabled="true"
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
-            app:error="@{newUser.confirmPassword == ``}">
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -139,7 +142,7 @@
                 android:inputType="textEmailAddress"
                 android:paddingStart="8dp"
                 android:singleLine="true"
-                android:text="@={newUser.confirmPassword}"/>
+                android:text="@={newUser.confirmPassword}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
