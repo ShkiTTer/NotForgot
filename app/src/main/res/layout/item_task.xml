@@ -3,7 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data></data>
+    <data>
+        <import type="com.example.todo.presentation.entity.Task"/>
+
+        <variable
+            name="task"
+            type="Task" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -27,7 +33,8 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Погладить песика" />
+            tools:text="Погладить песика"
+            android:text="@{task.title}"/>
 
         <TextView
             android:id="@+id/textView3"
@@ -39,7 +46,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
-            tools:text="Нежно за ушком" />
+            tools:text="Нежно за ушком"
+            android:text="@{task.description}"/>
 
         <androidx.appcompat.widget.AppCompatCheckBox
             android:layout_width="wrap_content"
