@@ -8,12 +8,14 @@ import com.example.todo.R
 import com.example.todo.databinding.ActivityMainBinding
 import com.example.todo.presentation.common.PresentationConstants
 import com.example.todo.presentation.viewmodel.MainViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModel()
+    private val taskListAdapter: TaskListAdapter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +26,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.apply {
             lifecycleOwner = this@MainActivity
-            tasks = mainViewModel.tasks
+            tasks = mainViewModel.taskList
         }
 
         setupClickListeners()
+        setupRecycler()
         initObserver()
 
         mainViewModel.getTasks()
@@ -40,8 +43,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        mainViewModel.tasks.observe(this, Observer {
-            println(it)
+        mainViewModel.taskList.observe(this, Observer {
+            taskListAdapter.setItems(it)
         })
+    }
+    private fun setupRecycler() {
+        binding.rvTaskList.apply {
+            adapter = taskListAdapter
+            setHasFixedSize(true)
+        }
     }
 }

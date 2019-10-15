@@ -7,6 +7,7 @@ import com.example.todo.data.repository.INetworkRepository
 import com.example.todo.data.repository.TaskRepository
 import com.example.todo.domain.repository.ITaskRepository
 import com.example.todo.domain.usecase.*
+import com.example.todo.presentation.ui.TaskListAdapter
 import com.example.todo.presentation.viewmodel.AutoLoginViewModel
 import com.example.todo.presentation.viewmodel.LoginViewModel
 import com.example.todo.presentation.viewmodel.MainViewModel
@@ -26,6 +27,8 @@ class TodoApp : Application() {
         single { GetTokenUseCase(get()) }
         single { SaveTokenUseCase(get()) }
         single { GetTasksUseCase(get()) }
+
+        single { TaskListAdapter() }
 
         viewModel { RegisterViewModel(get(), get()) }
         viewModel { LoginViewModel(get(), get()) }

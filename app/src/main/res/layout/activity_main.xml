@@ -7,12 +7,12 @@
     <data>
         <import type="androidx.lifecycle.LiveData"/>
         <import type="java.util.List"/>
-        <import type="com.example.todo.domain.entity.Task"/>
+        <import type="com.example.todo.presentation.interfaces.ListItem"/>
         <import type="android.view.View"/>
 
         <variable
             name="tasks"
-            type="LiveData&lt;List&lt;Task>>" />
+            type="LiveData&lt;List&lt;ListItem>>" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

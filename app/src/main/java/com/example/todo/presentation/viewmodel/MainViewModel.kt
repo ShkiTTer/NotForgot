@@ -5,10 +5,24 @@ import androidx.lifecycle.ViewModel
 import com.example.todo.domain.entity.Task
 import com.example.todo.domain.usecase.GetTasksUseCase
 import com.example.todo.domain.usecase.common.UseCase
+import com.example.todo.presentation.interfaces.ListItem
+import com.example.todo.presentation.mapper.PresentationMapper
 
 class MainViewModel(private val getTasksUseCase: GetTasksUseCase) : ViewModel() {
-    val tasks = MutableLiveData<List<Task>>()
+    val taskList = MutableLiveData<List<ListItem>>()
     var token: String? = null
+    val tasks = MutableLiveData<List<Task>>()
+
+    init {
+        tasks.observeForever {
+            if (it == null) {
+                taskList.value = null
+                return@observeForever
+            }
+
+            taskList.value = PresentationMapper.taskListToPresentation(it)
+        }
+    }
 
     fun getTasks() {
         getTasksUseCase.apply {
