@@ -24,7 +24,6 @@ class TaskViewFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            TaskViewFragment()
+        fun newInstance() = TaskViewFragment()
     }
 }

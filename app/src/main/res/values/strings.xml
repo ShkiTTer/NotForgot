@@ -19,4 +19,12 @@
     <string name="btn_cancel_registration">Войти</string>
 
     <string name="hint_input_category">Название категории</string>
+
+    <string name="title_add_task">Добавить заметку</string>
+    <string name="hint_title_task">Название</string>
+    <string name="hint_description_task">Описание</string>
+    <string name="hint_category_task">Категория</string>
+    <string name="hint_priority_task">Приоритет</string>
+    <string name="hint_deadline_task">Сделать до</string>
+    <string name="btn_save_task">Сохранить</string>
 </resources>
