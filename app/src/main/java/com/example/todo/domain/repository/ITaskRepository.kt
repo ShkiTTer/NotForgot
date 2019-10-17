@@ -1,9 +1,6 @@
 package com.example.todo.domain.repository
 
-import com.example.todo.domain.entity.LoginUser
-import com.example.todo.domain.entity.NewUser
-import com.example.todo.domain.entity.Task
-import com.example.todo.domain.entity.UserToken
+import com.example.todo.domain.entity.*
 
 interface ITaskRepository {
     suspend fun saveToken(token: String?)
@@ -13,4 +10,5 @@ interface ITaskRepository {
     suspend fun login(loginUser: LoginUser): UserToken
 
     suspend fun getTasks(token: String): List<Task>
+    suspend fun getCategories(token: String): List<Category>
 }

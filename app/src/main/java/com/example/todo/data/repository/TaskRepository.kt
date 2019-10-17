@@ -4,10 +4,7 @@ import android.content.Context
 import com.example.todo.Constants.SHARED_PREFERENCES_NAME
 import com.example.todo.Constants.SHARED_PREFERENCES_TOKEN
 import com.example.todo.data.mapper.NetworkMapper
-import com.example.todo.domain.entity.LoginUser
-import com.example.todo.domain.entity.NewUser
-import com.example.todo.domain.entity.Task
-import com.example.todo.domain.entity.UserToken
+import com.example.todo.domain.entity.*
 import com.example.todo.domain.repository.ITaskRepository
 
 class TaskRepository(
@@ -44,4 +41,7 @@ class TaskRepository(
 
     override suspend fun getTasks(token: String): List<Task> =
         networkRepository.getTasks(token)
+
+    override suspend fun getCategories(token: String): List<Category> =
+        networkRepository.getCategories(token)
 }

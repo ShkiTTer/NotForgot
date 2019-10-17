@@ -40,8 +40,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupClickListeners() {
         binding.fabAdd.setOnClickListener {
-            val intent = Intent(this, TaskActivity::class.java)
-            intent.putExtra(PresentationConstants.EXTRA_TASK_ACTION, TaskAction.ADD)
+            val intent = Intent(this, TaskActivity::class.java).apply {
+                putExtra(PresentationConstants.EXTRA_TASK_ACTION, TaskAction.ADD)
+                putExtra(PresentationConstants.EXTRA_TOKEN, mainViewModel.token)
+            }
+
             startActivity(intent)
         }
     }

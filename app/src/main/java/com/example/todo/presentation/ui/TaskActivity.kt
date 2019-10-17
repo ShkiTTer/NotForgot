@@ -13,6 +13,7 @@ class TaskActivity : AppCompatActivity() {
         setContentView(R.layout.activity_task)
 
         val action = intent.extras?.get(PresentationConstants.EXTRA_TASK_ACTION) as TaskAction
+        val token = intent.extras?.getString(PresentationConstants.EXTRA_TOKEN)
 
         with(supportFragmentManager.beginTransaction()) {
             when (action) {
@@ -20,7 +21,7 @@ class TaskActivity : AppCompatActivity() {
                     add(R.id.taskFragmentContainer, TaskViewFragment.newInstance())
                 }
                 TaskAction.ADD -> {
-                    add(R.id.taskFragmentContainer, AddEditTaskFragment.newInstance())
+                    add(R.id.taskFragmentContainer, AddEditTaskFragment.newInstance(action, token))
                 }
                 else -> return
             }
