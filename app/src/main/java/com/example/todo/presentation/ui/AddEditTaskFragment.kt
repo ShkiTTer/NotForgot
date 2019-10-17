@@ -38,6 +38,7 @@ class AddEditTaskFragment : Fragment() {
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
             task = addEditViewModel.task
+            categories = addEditViewModel.categories
         }
 
         addEditViewModel.getCategories()

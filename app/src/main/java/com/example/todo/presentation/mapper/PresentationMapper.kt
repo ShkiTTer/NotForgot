@@ -7,6 +7,9 @@ import com.example.todo.presentation.entity.NewUser
 import com.example.todo.presentation.interfaces.ListItem
 
 object PresentationMapper {
+    private fun categoryToPresentation(category: com.example.todo.domain.entity.Category): Category =
+        Category(category.id, category.name)
+
     fun newUserFromPresentation(newUser: NewUser): com.example.todo.domain.entity.NewUser =
         com.example.todo.domain.entity.NewUser(
             newUser.email,
@@ -25,7 +28,7 @@ object PresentationMapper {
         val listItems = mutableListOf<ListItem>()
 
         tasks.sortedBy { it.category.name }.forEach {
-            val category = Category(it.category.id, it.category.name)
+            val category = categoryToPresentation(it.category)
             val task = com.example.todo.presentation.entity.Task(
                 it.title,
                 it.description,
@@ -43,4 +46,7 @@ object PresentationMapper {
 
         return listItems
     }
+
+    fun categoriesToPresentation(categories: List<com.example.todo.domain.entity.Category>?): List<Category>? =
+        categories?.map { categoryToPresentation(it) }
 }

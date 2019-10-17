@@ -5,12 +5,18 @@
     tools:context=".presentation.ui.AddEditTaskFragment">
 
     <data>
+        <import type="com.example.todo.presentation.entity.Category"/>
         <import type="com.example.todo.presentation.entity.Task"/>
         <import type="com.example.todo.presentation.common.ObservableLiveData"/>
+        <import type="androidx.lifecycle.LiveData"/>
 
         <variable
             name="task"
             type="ObservableLiveData&lt;Task>" />
+
+        <variable
+            name="categories"
+            type="LiveData&lt;java.util.List&lt;Category>>" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -110,7 +116,9 @@
                         android:layout_height="wrap_content"
                         android:prompt="@string/hint_category_task"
                         android:spinnerMode="dropdown"
-                        tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+                        app:categories="@{categories}"
+                        app:selectedCategory="@={task.category}"
+                        tools:listitem="@layout/item_spinner" />
                 </FrameLayout>
 
 
@@ -139,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:prompt="@string/hint_category_task"
                         android:spinnerMode="dropdown"
-                        tools:listitem="@layout/support_simple_spinner_dropdown_item" />
+                        tools:listitem="@layout/item_spinner" />
                 </FrameLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
