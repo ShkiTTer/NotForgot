@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initObserver() {
         mainViewModel.taskList.observe(this, Observer {
-            taskListAdapter.setItems(it)
+            taskListAdapter.setItems(it ?: emptyList())
         })
     }
     private fun setupRecycler() {

@@ -8,10 +8,7 @@ import com.example.todo.data.repository.TaskRepository
 import com.example.todo.domain.repository.ITaskRepository
 import com.example.todo.domain.usecase.*
 import com.example.todo.presentation.ui.TaskListAdapter
-import com.example.todo.presentation.viewmodel.AutoLoginViewModel
-import com.example.todo.presentation.viewmodel.LoginViewModel
-import com.example.todo.presentation.viewmodel.MainViewModel
-import com.example.todo.presentation.viewmodel.RegisterViewModel
+import com.example.todo.presentation.viewmodel.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
@@ -34,6 +31,7 @@ class TodoApp : Application() {
         viewModel { LoginViewModel(get(), get()) }
         viewModel { AutoLoginViewModel(get()) }
         viewModel { MainViewModel(get()) }
+        viewModel { AddEditViewModel() }
     }
 
     override fun onCreate() {
