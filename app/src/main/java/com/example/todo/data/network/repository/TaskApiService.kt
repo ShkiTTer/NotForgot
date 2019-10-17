@@ -4,6 +4,7 @@ import com.example.todo.data.network.entity.RegisterUser
 import com.example.todo.data.network.entity.UserToken
 import com.example.todo.domain.entity.Category
 import com.example.todo.domain.entity.LoginUser
+import com.example.todo.domain.entity.Priority
 import com.example.todo.domain.entity.Task
 import retrofit2.Call
 import retrofit2.http.*
@@ -24,4 +25,8 @@ interface TaskApiService {
     @Headers("Accept: application/json")
     @GET("categories")
     fun getCategories(@Header("Authorization") token: String): Call<List<Category>>
+
+    @Headers("Accept: application/json")
+    @GET("priorities")
+    fun getPriorities(@Header("Authorization") token: String): Call<List<Priority>>
 }

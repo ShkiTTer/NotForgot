@@ -11,4 +11,5 @@ interface ITaskRepository {
 
     suspend fun getTasks(token: String): List<Task>
     suspend fun getCategories(token: String): List<Category>
+    suspend fun getPriorities(token: String): List<Priority>
 }

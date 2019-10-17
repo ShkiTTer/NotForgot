@@ -17,6 +17,10 @@
         <variable
             name="categories"
             type="LiveData&lt;java.util.List&lt;Category>>" />
+
+        <variable
+            name="priorities"
+            type="LiveData&lt;java.util.List&lt;com.example.todo.domain.entity.Priority>>" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -147,7 +151,9 @@
                         android:layout_height="wrap_content"
                         android:prompt="@string/hint_category_task"
                         android:spinnerMode="dropdown"
-                        tools:listitem="@layout/item_spinner" />
+                        tools:listitem="@layout/item_spinner"
+                        app:priorities="@{priorities}"
+                        app:selectedPriority="@={task.priority}"/>
                 </FrameLayout>
 
                 <com.google.android.material.textfield.TextInputLayout

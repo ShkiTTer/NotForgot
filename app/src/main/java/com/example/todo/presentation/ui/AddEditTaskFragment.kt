@@ -39,11 +39,13 @@ class AddEditTaskFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             task = addEditViewModel.task
             categories = addEditViewModel.categories
+            priorities = addEditViewModel.priorities
         }
 
         addEditViewModel.getCategories()
+        addEditViewModel.getPriorities()
 
-        addEditViewModel.categories.observe(viewLifecycleOwner, Observer {
+        addEditViewModel.priorities.observe(viewLifecycleOwner, Observer {
             println(it)
         })
 
