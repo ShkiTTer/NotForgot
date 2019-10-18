@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.todo.R
 import com.example.todo.databinding.ActivityMainBinding
+import com.example.todo.presentation.adapters.TaskListAdapter
 import com.example.todo.presentation.common.PresentationConstants
 import com.example.todo.presentation.entity.TaskAction
 import com.example.todo.presentation.viewmodel.MainViewModel
@@ -35,6 +36,14 @@ class MainActivity : AppCompatActivity() {
         setupRecycler()
         initObserver()
 
+        binding.refresh.setOnRefreshListener {
+            binding.refresh.isRefreshing = true
+            mainViewModel.getTasks()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
         mainViewModel.getTasks()
     }
 
@@ -52,6 +61,7 @@ class MainActivity : AppCompatActivity() {
     private fun initObserver() {
         mainViewModel.taskList.observe(this, Observer {
             taskListAdapter.setItems(it ?: emptyList())
+            binding.refresh.isRefreshing = false
         })
     }
     private fun setupRecycler() {

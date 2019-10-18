@@ -1,4 +1,4 @@
-package com.example.todo.presentation.ui
+package com.example.todo.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -46,6 +46,7 @@ class TaskListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     fun setItems(newItems: List<ListItem>) {
         items.clear()
         items.addAll(newItems)
+        notifyDataSetChanged()
     }
 
     inner class TaskViewHolder(private val binding: ItemTaskBinding) :
@@ -59,7 +60,7 @@ class TaskListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(task: Task) {
             binding.apply {
-
+                this.task = task
             }
         }
     }
@@ -68,7 +69,7 @@ class TaskListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) {
             binding.apply {
-
+                this.category = category
             }
         }
     }

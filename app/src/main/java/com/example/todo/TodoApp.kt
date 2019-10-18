@@ -7,7 +7,7 @@ import com.example.todo.data.repository.INetworkRepository
 import com.example.todo.data.repository.TaskRepository
 import com.example.todo.domain.repository.ITaskRepository
 import com.example.todo.domain.usecase.*
-import com.example.todo.presentation.ui.TaskListAdapter
+import com.example.todo.presentation.adapters.TaskListAdapter
 import com.example.todo.presentation.viewmodel.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel

@@ -27,7 +27,7 @@ object PresentationMapper {
     fun taskListToPresentation(tasks: List<Task>): List<ListItem> {
         val listItems = mutableListOf<ListItem>()
 
-        tasks.sortedBy { it.category.name }.forEach {
+        tasks.sortedBy { it.category.id }.forEach {
             val category = categoryToPresentation(it.category)
             val task = com.example.todo.presentation.entity.Task(
                 it.title,
