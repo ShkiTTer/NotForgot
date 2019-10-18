@@ -1,6 +1,7 @@
 package com.example.todo.data.network.repository
 
 import com.example.todo.data.DataConstants
+import com.example.todo.data.mapper.NetworkMapper
 import com.example.todo.data.network.entity.RegisterUser
 import com.example.todo.data.network.entity.UserToken
 import com.example.todo.data.repository.INetworkRepository
@@ -25,4 +26,11 @@ class NetworkRepository(private val taskApiService: TaskApiService) : INetworkRe
 
     override suspend fun getPriorities(token: String): List<Priority> =
         taskApiService.getPriorities("${DataConstants.TOKEN_HEADER} $token").await()
+
+    override suspend fun createTask(token: String, task: Task) {
+        taskApiService.createTask(
+            "${DataConstants.TOKEN_HEADER} $token",
+            NetworkMapper.newTask(task)
+        ).await()
+    }
 }

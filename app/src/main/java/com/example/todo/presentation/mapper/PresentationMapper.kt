@@ -49,4 +49,18 @@ object PresentationMapper {
 
     fun categoriesToPresentation(categories: List<com.example.todo.domain.entity.Category>?): List<Category>? =
         categories?.map { categoryToPresentation(it) }
+
+    fun taskToModel(task: com.example.todo.presentation.entity.Task): Task =
+        Task(
+            task.title,
+            task.description,
+            0,
+            1430505,
+            task.deadline,
+            task.priority!!,
+            categoryToModel(task.category!!)
+        )
+
+    fun categoryToModel(category: Category): com.example.todo.domain.entity.Category =
+        com.example.todo.domain.entity.Category(category.id!!, category.name)
 }

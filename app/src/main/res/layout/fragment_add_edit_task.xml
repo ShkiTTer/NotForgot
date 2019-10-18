@@ -46,7 +46,7 @@
             android:elevation="2dp"
             app:cardElevation="2dp"
             app:contentPadding="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintBottom_toTopOf="@+id/btnSaveTask"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4">
@@ -57,7 +57,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/textInputLayout5"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true"
                     app:hintAnimationEnabled="true"
@@ -67,11 +67,8 @@
                     app:error="@{task.title == `` ? @string/error_empty_field : null}">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
                         android:hint="@string/hint_title_task"
-                        android:paddingBottom="16dp"
-                        android:singleLine="true"
+                        style="@style/BasicInputField"
                         android:textSize="16sp"
                         android:text="@={task.title}"/>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -81,6 +78,7 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginBottom="8dp"
+                    android:clipChildren="false"
                     app:counterEnabled="true"
                     app:counterMaxLength="120"
                     app:errorEnabled="true"
@@ -93,14 +91,15 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="top"
                         android:hint="@string/hint_description_task"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
                         android:nestedScrollingEnabled="true"
                         android:singleLine="false"
                         android:textSize="16sp"
-                        android:text="@={task.description}"/>
+                        android:text="@={task.description}"
+                        android:lines="5"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <FrameLayout
@@ -169,14 +168,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/hint_deadline_task"
-                        android:paddingBottom="16dp" />
+                        android:paddingBottom="16dp"
+                        android:id="@+id/deadline"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnSaveTask"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="26dp"

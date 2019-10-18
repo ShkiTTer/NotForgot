@@ -7,24 +7,24 @@ import com.example.todo.domain.entity.Priority
 import com.example.todo.presentation.interfaces.ListItem
 
 data class Task(
-    private var _title: String? = null,
-    private var _description: String? = null,
+    private var _title: String = "",
+    private var _description: String = "",
     var created: Int? = null,
     var deadline: Int? = null,
     private var _category: Category? = null,
     private var _priority: Priority? = null
 ) : BaseObservable(), ListItem {
-    var title: String?
+    var title: String
         @Bindable get() = _title
         set(value) {
-            _title = value ?: ""
+            _title = value
             notifyPropertyChanged(BR.title)
         }
 
-    var description: String?
+    var description: String
     @Bindable get() = _description
     set(value) {
-        _description = value ?: ""
+        _description = value
         notifyPropertyChanged(BR.description)
     }
 

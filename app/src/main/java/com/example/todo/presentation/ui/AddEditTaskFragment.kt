@@ -1,5 +1,6 @@
 package com.example.todo.presentation.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +12,14 @@ import com.example.todo.R
 import com.example.todo.databinding.FragmentAddEditTaskBinding
 import com.example.todo.presentation.entity.TaskAction
 import com.example.todo.presentation.viewmodel.AddEditViewModel
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddEditTaskFragment : Fragment() {
 
     private lateinit var binding: FragmentAddEditTaskBinding
     private val addEditViewModel: AddEditViewModel by viewModel()
+    private val applicationContext: Context by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +35,10 @@ class AddEditTaskFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding =
-            DataBindingUtil.inflate(inflater,
-                R.layout.fragment_add_edit_task, container, false)
+            DataBindingUtil.inflate(
+                inflater,
+                R.layout.fragment_add_edit_task, container, false
+            )
 
         binding.apply {
             lifecycleOwner = viewLifecycleOwner
@@ -42,14 +47,22 @@ class AddEditTaskFragment : Fragment() {
             priorities = addEditViewModel.priorities
         }
 
+        setupClickListeners()
+
         addEditViewModel.getCategories()
         addEditViewModel.getPriorities()
 
-        addEditViewModel.priorities.observe(viewLifecycleOwner, Observer {
-            println(it)
-        })
-
         return binding.root
+    }
+
+    private fun setupClickListeners() {
+        binding.deadline.setOnClickListener {
+
+        }
+
+        binding.btnSaveTask.setOnClickListener {
+            addEditViewModel.createTask()
+        }
     }
 
     companion object {

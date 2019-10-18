@@ -52,13 +52,10 @@
             app:layout_constraintTop_toBottomOf="@+id/textView12">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:hint="@string/hint_name"
                 android:inputType="textEmailAddress"
-                android:paddingStart="8dp"
-                android:singleLine="true"
-                android:text="@={newUser.name}" />
+                android:text="@={newUser.name}"
+                style="@style/BasicInputField" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -80,13 +77,10 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:hint="@string/hint_mail"
                 android:inputType="textEmailAddress"
-                android:paddingStart="8dp"
-                android:singleLine="true"
-                android:text="@={newUser.email}" />
+                android:text="@={newUser.email}"
+                style="@style/BasicInputField" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -108,13 +102,10 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
-                android:paddingStart="8dp"
-                android:singleLine="true"
-                android:text="@={newUser.password}" />
+                android:text="@={newUser.password}"
+                style="@style/BasicInputField" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -136,13 +127,10 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:hint="@string/hint_repeat_password"
                 android:inputType="textPassword"
-                android:paddingStart="8dp"
-                android:singleLine="true"
-                android:text="@={newUser.confirmPassword}" />
+                android:text="@={newUser.confirmPassword}"
+                style="@style/BasicInputField" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

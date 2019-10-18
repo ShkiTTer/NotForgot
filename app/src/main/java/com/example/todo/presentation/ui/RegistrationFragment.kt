@@ -67,6 +67,10 @@ class RegistrationFragment : Fragment() {
         binding.btnRegister.setOnClickListener {
             registerViewModel.registerUser()
         }
+
+        binding.btnLogIn.setOnClickListener {
+            fragmentManager?.popBackStack()
+        }
     }
 
     companion object {

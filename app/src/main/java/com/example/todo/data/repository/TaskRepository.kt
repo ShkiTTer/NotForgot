@@ -47,4 +47,8 @@ class TaskRepository(
 
     override suspend fun getPriorities(token: String): List<Priority> =
         networkRepository.getPriorities(token)
+
+    override suspend fun createTask(token: String, task: Task) {
+        networkRepository.createTask(token, task)
+    }
 }
