@@ -37,7 +37,7 @@ class TaskRepository(
     }
 
     override suspend fun login(loginUser: LoginUser): UserToken =
-        NetworkMapper.userTokenFromNetwork(networkRepository.login(loginUser))
+        networkRepository.login(loginUser)
 
     override suspend fun getTasks(token: String): List<Task> =
         networkRepository.getTasks(token)
