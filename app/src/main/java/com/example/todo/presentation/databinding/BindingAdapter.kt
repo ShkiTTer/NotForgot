@@ -1,5 +1,6 @@
 package com.example.todo.presentation.databinding
 
+import android.graphics.Color
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
@@ -114,5 +115,11 @@ object BindingAdapter {
         }
 
         spinner.onItemSelectedListener = listener
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:color")
+    fun setColor(view: View, color: String) {
+        view.setBackgroundColor(Color.parseColor(color))
     }
 }

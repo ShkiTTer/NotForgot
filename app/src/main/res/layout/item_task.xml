@@ -19,7 +19,7 @@
             android:id="@+id/view"
             android:layout_width="8dp"
             android:layout_height="0dp"
-            android:background="@color/colorHighPriority"
+            app:color="@{task.priority.color}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
