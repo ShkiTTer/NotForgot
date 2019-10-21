@@ -4,11 +4,11 @@ import android.app.Application
 import androidx.room.Room
 import com.example.todo.data.db.common.AppDatabase
 import com.example.todo.data.db.repository.DbRepository
+import com.example.todo.data.local.LocalRepository
 import com.example.todo.data.network.repository.NetworkRepository
 import com.example.todo.data.network.utils.TaskApiProvider
-import com.example.todo.data.repository.INetworkRepository
-import com.example.todo.data.repository.TaskRepository
-import com.example.todo.domain.repository.ITaskRepository
+import com.example.todo.domain.repository.ILocalRepository
+import com.example.todo.domain.repository.INetworkRepository
 import com.example.todo.domain.usecase.*
 import com.example.todo.presentation.adapters.TaskListAdapter
 import com.example.todo.presentation.viewmodel.*
@@ -19,7 +19,6 @@ import org.koin.dsl.module
 
 class TodoApp : Application() {
     private val koinModule = module {
-        single { NetworkRepository(TaskApiProvider.create()) as INetworkRepository }
         single {
             Room.databaseBuilder(androidContext(), AppDatabase::class.java, "todo_db").build()
         }
@@ -30,7 +29,8 @@ class TodoApp : Application() {
                 get<AppDatabase>().getPriorityDao()
             )
         }
-        single { TaskRepository(get(), androidContext()) as ITaskRepository }
+        single { NetworkRepository(TaskApiProvider.create()) as INetworkRepository }
+        single { LocalRepository(androidContext()) as ILocalRepository }
 
         single { RegisterUseCase(get()) }
         single { LoginUseCase(get()) }

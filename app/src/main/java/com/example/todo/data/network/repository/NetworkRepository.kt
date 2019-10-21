@@ -4,14 +4,15 @@ import com.example.todo.data.DataConstants
 import com.example.todo.data.mapper.NetworkMapper
 import com.example.todo.data.network.entity.RegisterUser
 import com.example.todo.data.network.entity.UserToken
-import com.example.todo.data.repository.INetworkRepository
+import com.example.todo.domain.repository.INetworkRepository
 import com.example.todo.domain.entity.Category
 import com.example.todo.domain.entity.LoginUser
 import com.example.todo.domain.entity.Priority
 import com.example.todo.domain.entity.Task
 import retrofit2.await
 
-class NetworkRepository(private val taskApiService: TaskApiService) : INetworkRepository {
+class NetworkRepository(private val taskApiService: TaskApiService) :
+    INetworkRepository {
     override suspend fun registerUser(registerUser: RegisterUser): UserToken =
         taskApiService.registerUser(registerUser).await()
 

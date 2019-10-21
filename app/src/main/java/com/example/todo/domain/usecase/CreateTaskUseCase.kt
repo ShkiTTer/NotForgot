@@ -1,10 +1,10 @@
 package com.example.todo.domain.usecase
 
 import com.example.todo.domain.entity.Task
-import com.example.todo.domain.repository.ITaskRepository
+import com.example.todo.domain.repository.INetworkRepository
 import com.example.todo.domain.usecase.common.UseCase
 
-class CreateTaskUseCase(private val taskRepository: ITaskRepository): UseCase<Unit>() {
+class CreateTaskUseCase(private val networkRepository: INetworkRepository) : UseCase<Unit>() {
     var token: String? = null
     var task: Task? = null
 
@@ -12,6 +12,6 @@ class CreateTaskUseCase(private val taskRepository: ITaskRepository): UseCase<Un
         val tempToken = token ?: return null
         val tempTask = task ?: return null
 
-        return taskRepository.createTask(tempToken, tempTask)
+        return networkRepository.createTask(tempToken, tempTask)
     }
 }
