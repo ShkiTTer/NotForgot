@@ -23,7 +23,13 @@ class TodoApp : Application() {
         single {
             Room.databaseBuilder(androidContext(), AppDatabase::class.java, "todo_db").build()
         }
-        single { DbRepository(get<AppDatabase>().getTaskDAO()) }
+        single {
+            DbRepository(
+                get<AppDatabase>().getTaskDao(),
+                get<AppDatabase>().getCategoryDao(),
+                get<AppDatabase>().getPriorityDao()
+            )
+        }
         single { TaskRepository(get(), androidContext()) as ITaskRepository }
 
         single { RegisterUseCase(get()) }

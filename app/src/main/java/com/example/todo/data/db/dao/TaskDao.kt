@@ -6,7 +6,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.example.todo.data.db.entity.Task
 
-interface TaskDAO {
+interface TaskDao {
     @Query("Select * From Task")
     fun getAllTasks(): List<Task>
 
