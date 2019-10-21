@@ -7,6 +7,7 @@ import com.example.todo.data.db.repository.DbRepository
 import com.example.todo.data.local.LocalRepository
 import com.example.todo.data.network.repository.NetworkRepository
 import com.example.todo.data.network.utils.TaskApiProvider
+import com.example.todo.domain.repository.IDbRepository
 import com.example.todo.domain.repository.ILocalRepository
 import com.example.todo.domain.repository.INetworkRepository
 import com.example.todo.domain.usecase.*
@@ -27,7 +28,7 @@ class TodoApp : Application() {
                 get<AppDatabase>().getTaskDao(),
                 get<AppDatabase>().getCategoryDao(),
                 get<AppDatabase>().getPriorityDao()
-            )
+            ) as IDbRepository
         }
         single { NetworkRepository(TaskApiProvider.create()) as INetworkRepository }
         single { LocalRepository(androidContext()) as ILocalRepository }
