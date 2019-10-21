@@ -9,7 +9,7 @@ import com.example.todo.domain.entity.Task
 
 interface INetworkRepository {
     suspend fun registerUser(registerUser: RegisterUser): UserToken
-    suspend fun login(loginUser: LoginUser): UserToken
+    suspend fun login(loginUser: LoginUser): com.example.todo.domain.entity.UserToken
 
     suspend fun getTasks(token: String): List<Task>
     suspend fun getCategories(token: String): List<Category>

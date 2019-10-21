@@ -15,8 +15,8 @@ class NetworkRepository(private val taskApiService: TaskApiService) : INetworkRe
     override suspend fun registerUser(registerUser: RegisterUser): UserToken =
         taskApiService.registerUser(registerUser).await()
 
-    override suspend fun login(loginUser: LoginUser): UserToken =
-        taskApiService.login(loginUser).await()
+    override suspend fun login(loginUser: LoginUser): com.example.todo.domain.entity.UserToken =
+        NetworkMapper.userTokenFromNetwork(taskApiService.login(loginUser).await())
 
     override suspend fun getTasks(token: String): List<Task> =
         taskApiService.getTasks("${DataConstants.TOKEN_HEADER} $token").await()

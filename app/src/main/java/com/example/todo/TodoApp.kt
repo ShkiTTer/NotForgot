@@ -1,6 +1,9 @@
 package com.example.todo
 
 import android.app.Application
+import androidx.room.Room
+import com.example.todo.data.db.common.AppDatabase
+import com.example.todo.data.db.repository.DbRepository
 import com.example.todo.data.network.repository.NetworkRepository
 import com.example.todo.data.network.utils.TaskApiProvider
 import com.example.todo.data.repository.INetworkRepository
@@ -17,6 +20,16 @@ import org.koin.dsl.module
 class TodoApp : Application() {
     private val koinModule = module {
         single { NetworkRepository(TaskApiProvider.create()) as INetworkRepository }
+        single {
+            Room.databaseBuilder(androidContext(), AppDatabase::class.java, "todo_db").build()
+        }
+        single {
+            DbRepository(
+                get<AppDatabase>().getTaskDao(),
+                get<AppDatabase>().getCategoryDao(),
+                get<AppDatabase>().getPriorityDao()
+            )
+        }
         single { TaskRepository(get(), androidContext()) as ITaskRepository }
 
         single { RegisterUseCase(get()) }
