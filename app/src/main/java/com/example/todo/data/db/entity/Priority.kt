@@ -1,10 +1,11 @@
 package com.example.todo.data.db.entity
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
 data class Priority(
-    val id: Int,
-    val name: String,
+    @PrimaryKey val priorityId: Int,
+    val priorityName: String,
     val color: String
 )

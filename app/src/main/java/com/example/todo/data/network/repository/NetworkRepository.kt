@@ -2,21 +2,22 @@ package com.example.todo.data.network.repository
 
 import com.example.todo.data.DataConstants
 import com.example.todo.data.mapper.NetworkMapper
-import com.example.todo.data.network.entity.RegisterUser
-import com.example.todo.data.network.entity.UserToken
+import com.example.todo.domain.entity.*
 import com.example.todo.domain.repository.INetworkRepository
-import com.example.todo.domain.entity.Category
-import com.example.todo.domain.entity.LoginUser
-import com.example.todo.domain.entity.Priority
-import com.example.todo.domain.entity.Task
 import retrofit2.await
 
 class NetworkRepository(private val taskApiService: TaskApiService) :
     INetworkRepository {
-    override suspend fun registerUser(registerUser: RegisterUser): UserToken =
-        taskApiService.registerUser(registerUser).await()
+    override suspend fun registerUser(newUser: NewUser): UserToken =
+        NetworkMapper.userTokenFromNetwork(
+            taskApiService.registerUser(
+                NetworkMapper.newUserToNetwork(
+                    newUser
+                )
+            ).await()
+        )
 
-    override suspend fun login(loginUser: LoginUser): com.example.todo.domain.entity.UserToken =
+    override suspend fun login(loginUser: LoginUser): UserToken =
         NetworkMapper.userTokenFromNetwork(taskApiService.login(loginUser).await())
 
     override suspend fun getTasks(token: String): List<Task> =

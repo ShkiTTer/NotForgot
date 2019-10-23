@@ -1,18 +1,19 @@
 package com.example.todo.data.db.entity
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity
 data class Task(
-    val title: String,
-    val description: String,
-    val created: Date,
-    val deadline: Date?,
-    val category: Category,
-    val priority: Priority,
-    val done: Int,
-    val synchronized: Boolean = false,
-    @PrimaryKey(autoGenerate = true) val id: Int = 0
+    var title: String = "",
+    var description: String? = null,
+    var created: Date = Date(),
+    var deadline: Date? = null,
+    @Embedded var category: Category? = null,
+    @Embedded var priority: Priority? = null,
+    var done: Int = 0,
+    var synchronized: Boolean = false,
+    @PrimaryKey(autoGenerate = true) var task_id: Int = 0
 )
