@@ -16,5 +16,6 @@
     <color name="colorTaskNotDone">#F71919</color>
     
     <color name="colorHighPriority">#FC4040</color>
+    <color name="colorDelete">#EF2727</color>
 
 </resources>

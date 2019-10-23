@@ -2,8 +2,8 @@ package com.example.todo.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.R
 import com.example.todo.databinding.ItemCategoryBinding
@@ -13,6 +13,7 @@ import com.example.todo.presentation.entity.Task
 import com.example.todo.presentation.interfaces.ListItem
 import com.example.todo.presentation.interfaces.OnTaskClickListener
 import com.example.todo.presentation.interfaces.OnTaskCheckedChangeListener
+import com.example.todo.presentation.utils.TaskDiffCallback
 import kotlinx.android.synthetic.main.item_task.view.*
 
 class TaskListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -47,9 +48,13 @@ class TaskListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     fun setItems(newItems: List<ListItem>) {
+        val diffCallback = TaskDiffCallback(items, newItems)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
         items.clear()
         items.addAll(newItems)
-        notifyDataSetChanged()
+
+        diffResult.dispatchUpdatesTo(this)
     }
 
     fun setOnTaskClickListener(listener: OnTaskClickListener) {

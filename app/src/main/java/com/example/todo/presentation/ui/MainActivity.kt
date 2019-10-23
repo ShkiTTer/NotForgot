@@ -5,13 +5,17 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.R
 import com.example.todo.databinding.ActivityMainBinding
 import com.example.todo.presentation.adapters.TaskListAdapter
 import com.example.todo.presentation.common.PresentationConstants
 import com.example.todo.presentation.entity.TaskAction
+import com.example.todo.presentation.interfaces.ListItem
 import com.example.todo.presentation.interfaces.OnTaskCheckedChangeListener
 import com.example.todo.presentation.interfaces.OnTaskClickListener
+import com.example.todo.presentation.utils.TaskSwipeToDelete
 import com.example.todo.presentation.viewmodel.MainViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -73,6 +77,17 @@ class MainActivity : AppCompatActivity() {
             adapter = taskListAdapter
             setHasFixedSize(true)
         }
+
+        val swipeCallback = object : TaskSwipeToDelete(this) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                if (binding.rvTaskList.adapter?.getItemViewType(position) != ListItem.ListType.TASK.ordinal) return
+
+                mainViewModel.deleteTask(position)
+            }
+        }
+
+        ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.rvTaskList)
     }
 
     private fun setupListAdapter() {

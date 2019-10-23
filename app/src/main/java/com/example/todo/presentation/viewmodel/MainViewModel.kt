@@ -52,4 +52,11 @@ class MainViewModel(
             execute()
         }
     }
+
+    fun deleteTask(position: Int) {
+        val task = taskList.value?.toMutableList()?.removeAt(position) as com.example.todo.presentation.entity.Task
+        tasks.value = tasks.value?.toMutableList()?.apply {
+            remove(this.find { it.id == task.id })
+        }
+    }
 }
