@@ -45,15 +45,18 @@ class MainActivity : AppCompatActivity() {
         setupListAdapter()
         initObserver()
 
+        binding.refresh.setColorSchemeColors(
+            getColor(R.color.colorAccent)
+        )
+
         binding.refresh.setOnRefreshListener {
-            binding.refresh.isRefreshing = true
             mainViewModel.getTasks()
         }
     }
 
     override fun onResume() {
         super.onResume()
-        mainViewModel.getTasks()
+        getTaskList()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -65,10 +68,20 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.actionLogout -> {
+                mainViewModel.clearUserData()
+
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun getTaskList() {
+        binding.refresh.isRefreshing = true
+        mainViewModel.getTasks()
     }
 
     private fun setupClickListeners() {

@@ -37,6 +37,7 @@ class TodoApp : Application() {
         single { LoginUseCase(get()) }
         single { GetTokenUseCase(get()) }
         single { SaveTokenUseCase(get()) }
+        single { RemoveTokenUseCase(get()) }
         single { GetTasksUseCase(get()) }
         single { GetCategoriesUseCase(get()) }
         single { GetPrioritiesUseCase(get()) }
@@ -49,7 +50,7 @@ class TodoApp : Application() {
         viewModel { RegisterViewModel(get(), get()) }
         viewModel { LoginViewModel(get(), get()) }
         viewModel { AutoLoginViewModel(get()) }
-        viewModel { MainViewModel(get(), get(), get()) }
+        viewModel { MainViewModel(get(), get(), get(), get()) }
         viewModel { AddEditViewModel(get(), get(), get()) }
     }
 

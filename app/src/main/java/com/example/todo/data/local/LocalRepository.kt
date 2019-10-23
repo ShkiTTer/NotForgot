@@ -17,6 +17,13 @@ class LocalRepository(context: Context) : ILocalRepository {
         }
     }
 
+    override fun removeToken() {
+        prefs.edit().apply{
+            clear()
+            apply()
+        }
+    }
+
     companion object {
         private const val PREFS_NAME = "todo_prefs"
         private const val PREFS_TOKEN = "todo_token"
