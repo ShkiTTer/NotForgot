@@ -42,4 +42,8 @@ class NetworkRepository(private val taskApiService: TaskApiService) :
             NetworkMapper.newTask(task)
         ).await()
     }
+
+    override suspend fun deleteTask(token: String, taskId: Int) {
+        taskApiService.deleteTask("${DataConstants.TOKEN_HEADER} $token", taskId).await()
+    }
 }

@@ -11,4 +11,5 @@ interface INetworkRepository {
     suspend fun getPriorities(token: String): List<Priority>
     suspend fun createTask(token: String, task: Task)
     suspend fun updateTask(token: String, task: Task)
+    suspend fun deleteTask(token: String, taskId: Int)
 }

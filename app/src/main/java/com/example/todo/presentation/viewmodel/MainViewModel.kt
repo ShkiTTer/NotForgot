@@ -3,6 +3,7 @@ package com.example.todo.presentation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.todo.domain.entity.Task
+import com.example.todo.domain.usecase.DeleteTaskUseCase
 import com.example.todo.domain.usecase.GetTasksUseCase
 import com.example.todo.domain.usecase.UpdateTaskUseCase
 import com.example.todo.domain.usecase.common.UseCase
@@ -11,7 +12,8 @@ import com.example.todo.presentation.mapper.PresentationMapper
 
 class MainViewModel(
     private val getTasksUseCase: GetTasksUseCase,
-    private val updateTaskUseCase: UpdateTaskUseCase
+    private val updateTaskUseCase: UpdateTaskUseCase,
+    private val deleteTaskUseCase: DeleteTaskUseCase
 ) : ViewModel() {
     val taskList = MutableLiveData<List<ListItem>>()
     var token: String? = null
@@ -57,6 +59,12 @@ class MainViewModel(
         val task = taskList.value?.toMutableList()?.removeAt(position) as com.example.todo.presentation.entity.Task
         tasks.value = tasks.value?.toMutableList()?.apply {
             remove(this.find { it.id == task.id })
+        }
+
+        deleteTaskUseCase.apply {
+            token = this@MainViewModel.token
+            taskId = task.id
+            execute()
         }
     }
 }
