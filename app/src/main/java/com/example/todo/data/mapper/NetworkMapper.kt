@@ -5,6 +5,7 @@ import com.example.todo.data.network.entity.RegisterUser
 import com.example.todo.data.network.entity.UserToken
 import com.example.todo.domain.entity.NewUser
 import com.example.todo.domain.entity.Task
+import java.util.*
 
 object NetworkMapper {
     fun newUserToNetwork(newUser: NewUser): RegisterUser = RegisterUser(
@@ -18,5 +19,25 @@ object NetworkMapper {
             userToken.token
         )
 
-    fun newTask(task: Task): NewTask = NewTask(task.title, task.description, task.deadline?.time, task.category.id, task.priority.id)
+    fun newTask(task: Task): NewTask = NewTask(
+        task.title,
+        task.description,
+        task.deadline?.time,
+        task.category.id,
+        task.priority.id
+    )
+
+    fun taskListFromNetwork(tasks: List<com.example.todo.data.network.entity.Task>): List<Task> =
+        tasks.map {
+            Task(
+                it.title,
+                it.description,
+                it.done,
+                Date(it.created),
+                it.deadline?.let { dateLong -> Date(dateLong) },
+                it.priority,
+                it.category,
+                it.id
+            )
+        }
 }

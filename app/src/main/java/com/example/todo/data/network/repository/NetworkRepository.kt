@@ -21,7 +21,7 @@ class NetworkRepository(private val taskApiService: TaskApiService) :
         NetworkMapper.userTokenFromNetwork(taskApiService.login(loginUser).await())
 
     override suspend fun getTasks(token: String): List<Task> =
-        taskApiService.getTasks("${DataConstants.TOKEN_HEADER} $token").await()
+        NetworkMapper.taskListFromNetwork(taskApiService.getTasks("${DataConstants.TOKEN_HEADER} $token").await())
 
     override suspend fun getCategories(token: String): List<Category> =
         taskApiService.getCategories("${DataConstants.TOKEN_HEADER} $token").await()
