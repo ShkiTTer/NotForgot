@@ -41,13 +41,14 @@ class TodoApp : Application() {
         single { GetCategoriesUseCase(get()) }
         single { GetPrioritiesUseCase(get()) }
         single { CreateTaskUseCase(get()) }
+        single { UpdateTaskUseCase(get()) }
 
         single { TaskListAdapter() }
 
         viewModel { RegisterViewModel(get(), get()) }
         viewModel { LoginViewModel(get(), get()) }
         viewModel { AutoLoginViewModel(get()) }
-        viewModel { MainViewModel(get()) }
+        viewModel { MainViewModel(get(), get()) }
         viewModel { AddEditViewModel(get(), get(), get()) }
     }
 

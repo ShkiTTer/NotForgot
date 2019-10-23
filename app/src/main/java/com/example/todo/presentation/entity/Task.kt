@@ -11,10 +11,11 @@ data class Task(
     private var _title: String = "",
     private var _description: String = "",
     var created: Date = Date(),
+    val id: Int = 0,
     var deadline: Date? = null,
     private var _category: Category? = null,
     private var _priority: Priority? = null,
-    private var _done: Int = 0
+    private var _done: Boolean = false
 ) : BaseObservable(), ListItem {
     var title: String
         @Bindable get() = _title
@@ -44,7 +45,7 @@ data class Task(
         notifyPropertyChanged(BR.priority)
     }
 
-    var done: Int
+    var done: Boolean
     @Bindable get() = _done
     set(value) {
         _done = value

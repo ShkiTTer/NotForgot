@@ -24,7 +24,10 @@ object NetworkMapper {
         task.description,
         task.deadline?.time,
         task.category.id,
-        task.priority.id
+        task.priority.id,
+        task.done,
+        task.id,
+        task.created.time
     )
 
     fun taskListFromNetwork(tasks: List<com.example.todo.data.network.entity.Task>): List<Task> =

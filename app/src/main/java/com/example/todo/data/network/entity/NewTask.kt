@@ -10,5 +10,5 @@ data class NewTask(
     @SerializedName("priority_id") val priority: Int,
     val done:Int = 0,
     val id: Int = 0,
-    val created: Int = 0
+    val created: Long = 0
 )

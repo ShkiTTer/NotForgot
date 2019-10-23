@@ -10,6 +10,8 @@ import com.example.todo.databinding.ActivityMainBinding
 import com.example.todo.presentation.adapters.TaskListAdapter
 import com.example.todo.presentation.common.PresentationConstants
 import com.example.todo.presentation.entity.TaskAction
+import com.example.todo.presentation.interfaces.OnTaskCheckedChangeListener
+import com.example.todo.presentation.interfaces.OnTaskClickListener
 import com.example.todo.presentation.viewmodel.MainViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -34,6 +36,7 @@ class MainActivity : AppCompatActivity() {
 
         setupClickListeners()
         setupRecycler()
+        setupListAdapter()
         initObserver()
 
         binding.refresh.setOnRefreshListener {
@@ -64,10 +67,25 @@ class MainActivity : AppCompatActivity() {
             binding.refresh.isRefreshing = false
         })
     }
+
     private fun setupRecycler() {
         binding.rvTaskList.apply {
             adapter = taskListAdapter
             setHasFixedSize(true)
         }
+    }
+
+    private fun setupListAdapter() {
+        taskListAdapter.setOnTaskClickListener(object : OnTaskClickListener {
+            override fun onClick(taskId: Int) {
+
+            }
+        })
+
+        taskListAdapter.setOnTaskCheckedChangeListener(object : OnTaskCheckedChangeListener {
+            override fun onChange(position: Int) {
+                mainViewModel.updateTask(position)
+            }
+        })
     }
 }

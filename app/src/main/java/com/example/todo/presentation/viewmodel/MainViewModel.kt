@@ -4,11 +4,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.todo.domain.entity.Task
 import com.example.todo.domain.usecase.GetTasksUseCase
+import com.example.todo.domain.usecase.UpdateTaskUseCase
 import com.example.todo.domain.usecase.common.UseCase
 import com.example.todo.presentation.interfaces.ListItem
 import com.example.todo.presentation.mapper.PresentationMapper
 
-class MainViewModel(private val getTasksUseCase: GetTasksUseCase) : ViewModel() {
+class MainViewModel(
+    private val getTasksUseCase: GetTasksUseCase,
+    private val updateTaskUseCase: UpdateTaskUseCase
+) : ViewModel() {
     val taskList = MutableLiveData<List<ListItem>>()
     var token: String? = null
     val tasks = MutableLiveData<List<Task>>()
@@ -37,6 +41,15 @@ class MainViewModel(private val getTasksUseCase: GetTasksUseCase) : ViewModel() 
                     t.printStackTrace()
                 }
             })
+        }
+    }
+
+    fun updateTask(position: Int) {
+        updateTaskUseCase.apply {
+            token = this@MainViewModel.token
+            task =
+                PresentationMapper.taskToModel(this@MainViewModel.taskList.value?.get(position) as com.example.todo.presentation.entity.Task)
+            execute()
         }
     }
 }

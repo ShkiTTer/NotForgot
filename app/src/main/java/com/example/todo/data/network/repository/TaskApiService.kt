@@ -34,4 +34,8 @@ interface TaskApiService {
     @Headers("Accept: application/json")
     @POST("tasks")
     fun createTask(@Header("Authorization") token: String, @Body task: NewTask): Call<Unit>
+
+    @Headers("Accept: application/json")
+    @PATCH("tasks/{id}")
+    fun updateTask(@Header("Authorization") token: String, @Body task: NewTask, @Path("id") id: Int = task.id): Call<Unit>
 }

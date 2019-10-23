@@ -35,4 +35,11 @@ class NetworkRepository(private val taskApiService: TaskApiService) :
             NetworkMapper.newTask(task)
         ).await()
     }
+
+    override suspend fun updateTask(token: String, task: Task) {
+        taskApiService.updateTask(
+            "${DataConstants.TOKEN_HEADER} $token",
+            NetworkMapper.newTask(task)
+        ).await()
+    }
 }

@@ -5,10 +5,15 @@
 
     <data>
         <import type="com.example.todo.presentation.entity.Task"/>
+        <import type="com.example.todo.presentation.interfaces.OnTaskCheckedChangeListener"/>
 
         <variable
             name="task"
             type="Task" />
+
+        <variable
+            name="listener"
+            type="OnTaskCheckedChangeListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,12 +54,14 @@
             tools:text="Нежно за ушком"
             android:text="@{task.description}"/>
 
-        <androidx.appcompat.widget.AppCompatCheckBox
+        <CheckBox
+            android:id="@+id/taskDone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
-            android:checked="false"
-            android:focusable="false"
+            android:clickable="true"
+            android:focusable="true"
+            android:checked="@={task.done}"
             android:text=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
