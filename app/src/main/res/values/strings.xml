@@ -27,4 +27,6 @@
     <string name="hint_priority_task">Приоритет</string>
     <string name="hint_deadline_task">Сделать до</string>
     <string name="btn_save_task">Сохранить</string>
+
+    <string name="action_logout">Logout</string>
 </resources>
