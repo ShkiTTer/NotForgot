@@ -54,8 +54,8 @@ object PresentationMapper {
         Task(
             task.title,
             task.description,
-            0,
-            1430505,
+            task.done,
+            task.created,
             task.deadline,
             task.priority!!,
             categoryToModel(task.category!!)

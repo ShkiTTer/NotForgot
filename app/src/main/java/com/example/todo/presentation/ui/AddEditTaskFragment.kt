@@ -1,10 +1,12 @@
 package com.example.todo.presentation.ui
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,6 +16,7 @@ import com.example.todo.presentation.entity.TaskAction
 import com.example.todo.presentation.viewmodel.AddEditViewModel
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class AddEditTaskFragment : Fragment() {
 
@@ -57,12 +60,23 @@ class AddEditTaskFragment : Fragment() {
 
     private fun setupClickListeners() {
         binding.deadline.setOnClickListener {
-
+            createDatePickerDialog().show()
         }
 
         binding.btnSaveTask.setOnClickListener {
             addEditViewModel.createTask()
         }
+    }
+
+    private fun createDatePickerDialog(): DatePickerDialog {
+        val calendar = Calendar.getInstance()
+        calendar.time = addEditViewModel.task.value?.deadline ?: Date()
+
+        return DatePickerDialog(this.activity!!,
+            DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                calendar.set(year, month, dayOfMonth)
+                addEditViewModel.task.value?.deadline = calendar.time
+            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
     }
 
     companion object {

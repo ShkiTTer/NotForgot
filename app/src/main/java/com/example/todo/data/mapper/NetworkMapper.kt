@@ -18,5 +18,5 @@ object NetworkMapper {
             userToken.token
         )
 
-    fun newTask(task: Task): NewTask = NewTask(task.title, task.description, task.deadline, task.category.id, task.priority.id)
+    fun newTask(task: Task): NewTask = NewTask(task.title, task.description, task.deadline?.time, task.category.id, task.priority.id)
 }

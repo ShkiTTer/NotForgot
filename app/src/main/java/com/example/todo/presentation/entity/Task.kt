@@ -5,14 +5,16 @@ import androidx.databinding.Bindable
 import androidx.databinding.library.baseAdapters.BR
 import com.example.todo.domain.entity.Priority
 import com.example.todo.presentation.interfaces.ListItem
+import java.util.*
 
 data class Task(
     private var _title: String = "",
     private var _description: String = "",
-    var created: Int? = null,
-    var deadline: Int? = null,
+    var created: Date = Date(),
+    var deadline: Date? = null,
     private var _category: Category? = null,
-    private var _priority: Priority? = null
+    private var _priority: Priority? = null,
+    private var _done: Int = 0
 ) : BaseObservable(), ListItem {
     var title: String
         @Bindable get() = _title
@@ -40,6 +42,13 @@ data class Task(
     set(value) {
         _priority = value
         notifyPropertyChanged(BR.priority)
+    }
+
+    var done: Int
+    @Bindable get() = _done
+    set(value) {
+        _done = value
+        notifyPropertyChanged(BR.done)
     }
 
     override fun getItemType(): Int = ListItem.ListType.TASK.ordinal
