@@ -62,6 +62,7 @@
             android:clickable="true"
             android:focusable="true"
             android:checked="@={task.done}"
+            android:enabled="@{!task.done}"
             android:text=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
