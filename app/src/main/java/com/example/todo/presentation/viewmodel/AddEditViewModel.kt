@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.todo.domain.entity.Category
 import com.example.todo.domain.entity.Priority
+import com.example.todo.domain.usecase.CreateCategoryUseCase
 import com.example.todo.domain.usecase.CreateTaskUseCase
 import com.example.todo.domain.usecase.GetCategoriesUseCase
 import com.example.todo.domain.usecase.GetPrioritiesUseCase
@@ -16,13 +17,15 @@ import com.example.todo.presentation.mapper.PresentationMapper
 class AddEditViewModel(
     private val getCategoriesUseCase: GetCategoriesUseCase,
     private val getPrioritiesUseCase: GetPrioritiesUseCase,
-    private val createTaskUseCase: CreateTaskUseCase
+    private val createTaskUseCase: CreateTaskUseCase,
+    private val createCategoryUseCase: CreateCategoryUseCase
 ) : ViewModel() {
 
     var token: String? = null
     lateinit var taskAction: TaskAction
 
     val task = ObservableLiveData(Task())
+    val newCategory = ObservableLiveData(com.example.todo.presentation.entity.Category())
     val categories = MutableLiveData<List<com.example.todo.presentation.entity.Category>>()
     val priorities = MutableLiveData<List<Priority>>()
 
@@ -74,5 +77,15 @@ class AddEditViewModel(
                 }
             })
         }
+    }
+
+    fun createCategory() {
+        createCategoryUseCase.apply {
+            token = this@AddEditViewModel.token
+            category = PresentationMapper.categoryToModel(this@AddEditViewModel.newCategory.value!!)
+            execute()
+        }
+
+        newCategory.value = com.example.todo.presentation.entity.Category()
     }
 }

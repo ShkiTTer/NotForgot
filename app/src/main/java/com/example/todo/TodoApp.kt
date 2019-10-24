@@ -47,7 +47,7 @@ class TodoApp : Application() {
         single { CreateTaskUseCase(get(), get()) }
         single { UpdateTaskUseCase(get(), get()) }
         single { DeleteTaskUseCase(get(), get()) }
-        single { CreateTaskUseCase(get(), get()) }
+        single { CreateCategoryUseCase(get(), get()) }
 
         single { TaskListAdapter() }
 
@@ -55,7 +55,7 @@ class TodoApp : Application() {
         viewModel { LoginViewModel(get(), get()) }
         viewModel { AutoLoginViewModel(get()) }
         viewModel { MainViewModel(get(), get(), get(), get()) }
-        viewModel { AddEditViewModel(get(), get(), get()) }
+        viewModel { AddEditViewModel(get(), get(), get(), get()) }
     }
 
     override fun onCreate() {

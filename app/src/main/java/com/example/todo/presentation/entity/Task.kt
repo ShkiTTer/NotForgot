@@ -13,7 +13,7 @@ data class Task(
     var created: Date = Date(),
     var synchronized: Boolean = false,
     val id: Int = 0,
-    var deadline: Date? = null,
+    private var _deadline: Date? = null,
     private var _category: Category? = null,
     private var _priority: Priority? = null,
     private var _done: Boolean = false
@@ -51,6 +51,13 @@ data class Task(
     set(value) {
         _done = value
         notifyPropertyChanged(BR.done)
+    }
+
+    var deadline: Date?
+    @Bindable get() = _deadline
+    set(value) {
+        _deadline = value
+        notifyPropertyChanged(BR.deadline)
     }
 
     override fun getItemType(): Int = ListItem.ListType.TASK.ordinal

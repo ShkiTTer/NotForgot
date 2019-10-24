@@ -1,16 +1,17 @@
 package com.example.todo.presentation.ui
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.example.todo.R
+import com.example.todo.databinding.DialogInputCategoryBinding
 import com.example.todo.databinding.FragmentAddEditTaskBinding
 import com.example.todo.presentation.entity.TaskAction
 import com.example.todo.presentation.viewmodel.AddEditViewModel
@@ -65,6 +66,13 @@ class AddEditTaskFragment : Fragment() {
 
         binding.btnSaveTask.setOnClickListener {
             addEditViewModel.createTask()
+            Toast.makeText(applicationContext, R.string.success_add_task, Toast.LENGTH_LONG)
+                .show()
+            this.activity?.finish()
+        }
+
+        binding.ivAddCategory.setOnClickListener {
+            createCategoryDialog().show()
         }
     }
 
@@ -72,11 +80,44 @@ class AddEditTaskFragment : Fragment() {
         val calendar = Calendar.getInstance()
         calendar.time = addEditViewModel.task.value?.deadline ?: Date()
 
-        return DatePickerDialog(this.activity!!,
+        return DatePickerDialog(
+            this.activity!!,
             DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                 calendar.set(year, month, dayOfMonth)
                 addEditViewModel.task.value?.deadline = calendar.time
-            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+    }
+
+    private fun createCategoryDialog(): AlertDialog {
+        val dialogBinding: DialogInputCategoryBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(this.activity),
+            R.layout.dialog_input_category,
+            null,
+            false
+        )
+
+        dialogBinding.category = addEditViewModel.newCategory
+
+        return AlertDialog.Builder(this.activity)
+            .setTitle(R.string.title_add_category)
+            .setView(dialogBinding.root)
+            .setNegativeButton(R.string.negative_btn, null)
+            .setPositiveButton(R.string.positive_btn_add_category) { dialog, which ->
+                val name = addEditViewModel.newCategory.value?.name ?: return@setPositiveButton
+
+                if (name.trim().isNotEmpty()) {
+                    addEditViewModel.createCategory()
+
+                    Toast.makeText(applicationContext, R.string.success_add_category, Toast.LENGTH_LONG)
+                        .show()
+
+                    addEditViewModel.getCategories()
+                }
+            }.create()
     }
 
     companion object {

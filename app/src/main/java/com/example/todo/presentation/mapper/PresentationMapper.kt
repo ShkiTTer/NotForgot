@@ -67,5 +67,5 @@ object PresentationMapper {
         )
 
     fun categoryToModel(category: Category): com.example.todo.domain.entity.Category =
-        com.example.todo.domain.entity.Category(category.id!!, category.name)
+        com.example.todo.domain.entity.Category(category.id, category.name)
 }

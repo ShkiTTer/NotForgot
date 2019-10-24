@@ -2,18 +2,26 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data></data>
+    <data>
+        <import type="com.example.todo.presentation.common.ObservableLiveData" />
+
+        <variable
+            name="category"
+            type="ObservableLiveData&lt;com.example.todo.presentation.entity.Category>" />
+    </data>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:errorEnabled="true">
+        app:errorEnabled="true"
+        app:error="@{category.name == `` ? @string/error_empty_field : null}">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:text="@={category.name}"
             android:hint="@string/hint_input_category" />
 
     </com.google.android.material.textfield.TextInputLayout>

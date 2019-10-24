@@ -12,7 +12,10 @@ import com.example.todo.domain.entity.Priority
 import com.example.todo.presentation.adapters.CategoryAdapter
 import com.example.todo.presentation.adapters.PriorityAdapter
 import com.example.todo.presentation.entity.Category
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import java.text.SimpleDateFormat
+import java.util.*
 
 object BindingAdapter {
     @JvmStatic
@@ -74,7 +77,8 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("app:priorities")
     fun setPriorities(spinner: Spinner, priorities: List<Priority>?) {
-        spinner.adapter = PriorityAdapter(spinner.context, R.layout.item_spinner, priorities ?: emptyList())
+        spinner.adapter =
+            PriorityAdapter(spinner.context, R.layout.item_spinner, priorities ?: emptyList())
     }
 
     @JvmStatic
@@ -121,5 +125,14 @@ object BindingAdapter {
     @BindingAdapter("app:color")
     fun setColor(view: View, color: String) {
         view.setBackgroundColor(Color.parseColor(color))
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:deadline")
+    fun setDeadline(textInputEditText: TextInputEditText, deadline: Date?) {
+        val sdf = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG, Locale("ru"))
+
+        if (deadline == null) textInputEditText.text = null
+        else textInputEditText.setText(sdf.format(deadline))
     }
 }

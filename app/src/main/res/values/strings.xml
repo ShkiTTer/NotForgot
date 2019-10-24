@@ -4,6 +4,11 @@
     <string name="btn_edit">Редактировать</string>
     <string name="title_login">Вход</string>
     <string name="title_registration">Регистрация</string>
+    <string name="title_add_category">Добавить категорию</string>
+    <string name="positive_btn_add_category">Сохранить</string>
+    <string name="negative_btn">Отмена</string>
+    <string name="success_add_category">Категория создана</string>
+    <string name="success_add_task">Задача создана</string>
 
     <string name="hint_mail">E-mail</string>
     <string name="hint_password">Пароль</string>

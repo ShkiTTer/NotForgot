@@ -6,7 +6,7 @@ import androidx.databinding.library.baseAdapters.BR
 import com.example.todo.presentation.interfaces.ListItem
 
 data class Category(
-    var id: Int? = null,
+    var id: Int = 0,
     private var _name: String = ""
 ) : BaseObservable(), ListItem {
     var name: String
