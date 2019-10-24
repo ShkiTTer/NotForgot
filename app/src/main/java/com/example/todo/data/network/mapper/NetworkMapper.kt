@@ -1,4 +1,4 @@
-package com.example.todo.data.mapper
+package com.example.todo.data.network.mapper
 
 import com.example.todo.data.network.entity.NewTask
 import com.example.todo.data.network.entity.RegisterUser

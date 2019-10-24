@@ -1,6 +1,6 @@
-package com.example.todo.data
+package com.example.todo.data.network
 
-object DataConstants {
+object NetworkConstants {
     const val BASE_URL = "http://practice.mobile.kreosoft.ru/api/"
     const val TOKEN_HEADER = "Bearer"
 }
