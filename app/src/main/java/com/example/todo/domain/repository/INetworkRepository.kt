@@ -9,7 +9,10 @@ interface INetworkRepository {
     suspend fun getTasks(token: String): List<Task>?
     suspend fun getCategories(token: String): List<Category>?
     suspend fun getPriorities(token: String): List<Priority>?
-    suspend fun createTask(token: String, task: Task)
-    suspend fun updateTask(token: String, task: Task)
-    suspend fun deleteTask(token: String, taskId: Int)
+
+    suspend fun createTask(token: String, task: Task): Unit?
+    suspend fun updateTask(token: String, task: Task): Unit?
+    suspend fun deleteTask(token: String, taskId: Int): Unit?
+
+    suspend fun createCategory(token: String, category: Category): Unit?
 }

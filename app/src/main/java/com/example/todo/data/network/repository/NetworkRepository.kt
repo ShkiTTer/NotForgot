@@ -12,28 +12,37 @@ class NetworkRepository(
     private val networkStateUtil: NetworkStateUtil
 ) :
     INetworkRepository {
-    override suspend fun registerUser(newUser: NewUser): UserToken =
-        NetworkMapper.userTokenFromNetwork(
-            taskApiService.registerUser(
-                NetworkMapper.newUserToNetwork(
-                    newUser
-                )
-            ).await()
-        )
+    override suspend fun registerUser(newUser: NewUser): UserToken? {
+        return if (networkStateUtil.isOnline)
+            NetworkMapper.userTokenFromNetwork(
+                taskApiService.registerUser(
+                    NetworkMapper.newUserToNetwork(
+                        newUser
+                    )
+                ).await()
+            )
+        else null
+    }
 
-    override suspend fun login(loginUser: LoginUser): UserToken? =
-        NetworkMapper.userTokenFromNetwork(taskApiService.login(loginUser).await())
+    override suspend fun login(loginUser: LoginUser): UserToken? {
+        return if (networkStateUtil.isOnline)
+            NetworkMapper.userTokenFromNetwork(taskApiService.login(loginUser).await())
+        else null
+    }
 
     override suspend fun getTasks(token: String): List<Task>? {
         return if (networkStateUtil.isOnline) {
             NetworkMapper.taskListFromNetwork(taskApiService.getTasks("${NetworkConstants.TOKEN_HEADER} $token").await())
-        }
-        else null
+        } else null
     }
 
 
-    override suspend fun getCategories(token: String): List<Category> =
-        taskApiService.getCategories("${NetworkConstants.TOKEN_HEADER} $token").await()
+    override suspend fun getCategories(token: String): List<Category>? {
+        return if (networkStateUtil.isOnline)
+            taskApiService.getCategories("${NetworkConstants.TOKEN_HEADER} $token").await()
+        else null
+    }
+
 
     override suspend fun getPriorities(token: String): List<Priority>? {
         return if (networkStateUtil.isOnline)
@@ -42,21 +51,36 @@ class NetworkRepository(
     }
 
 
-    override suspend fun createTask(token: String, task: Task) {
-        taskApiService.createTask(
-            "${NetworkConstants.TOKEN_HEADER} $token",
-            NetworkMapper.newTask(task)
-        ).await()
+    override suspend fun createTask(token: String, task: Task): Unit? {
+        return if (networkStateUtil.isOnline)
+            taskApiService.createTask(
+                "${NetworkConstants.TOKEN_HEADER} $token",
+                NetworkMapper.newTask(task)
+            ).await()
+        else null
     }
 
-    override suspend fun updateTask(token: String, task: Task) {
-        taskApiService.updateTask(
-            "${NetworkConstants.TOKEN_HEADER} $token",
-            NetworkMapper.newTask(task)
-        ).await()
+    override suspend fun updateTask(token: String, task: Task): Unit? {
+        return if (networkStateUtil.isOnline)
+            taskApiService.updateTask(
+                "${NetworkConstants.TOKEN_HEADER} $token",
+                NetworkMapper.newTask(task)
+            ).await()
+        else null
     }
 
-    override suspend fun deleteTask(token: String, taskId: Int) {
-        taskApiService.deleteTask("${NetworkConstants.TOKEN_HEADER} $token", taskId).await()
+    override suspend fun deleteTask(token: String, taskId: Int): Unit? {
+        return if (networkStateUtil.isOnline)
+            taskApiService.deleteTask("${NetworkConstants.TOKEN_HEADER} $token", taskId).await()
+        else null
+    }
+
+    override suspend fun createCategory(token: String, category: Category): Unit? {
+        return if (networkStateUtil.isOnline)
+            taskApiService.createCategory(
+                "${NetworkConstants.TOKEN_HEADER} $token",
+                category
+            ).await()
+        else null
     }
 }

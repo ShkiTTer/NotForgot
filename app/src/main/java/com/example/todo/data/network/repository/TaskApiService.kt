@@ -42,4 +42,8 @@ interface TaskApiService {
     @Headers("Accept: application/json")
     @DELETE("tasks/{id}")
     fun deleteTask(@Header("Authorization") token: String, @Path("id") id: Int): Call<Unit>
+
+    @Headers("Accept: application/json")
+    @POST("categories")
+    fun createCategory(@Header("Authorization") token: String, @Body category: Category): Call<Unit>
 }
