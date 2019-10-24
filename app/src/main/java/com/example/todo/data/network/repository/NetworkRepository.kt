@@ -35,8 +35,12 @@ class NetworkRepository(
     override suspend fun getCategories(token: String): List<Category> =
         taskApiService.getCategories("${NetworkConstants.TOKEN_HEADER} $token").await()
 
-    override suspend fun getPriorities(token: String): List<Priority> =
-        taskApiService.getPriorities("${NetworkConstants.TOKEN_HEADER} $token").await()
+    override suspend fun getPriorities(token: String): List<Priority>? {
+        return if (networkStateUtil.isOnline)
+            taskApiService.getPriorities("${NetworkConstants.TOKEN_HEADER} $token").await()
+        else null
+    }
+
 
     override suspend fun createTask(token: String, task: Task) {
         taskApiService.createTask(
