@@ -20,6 +20,10 @@ class GetTasksUseCase(
         val dbData = dbRepository.getTasks().toMutableList()
         val data = mutableListOf<Task>()
 
+        if (netData == null) {
+            return dbData
+        }
+
         if (dbData.isEmpty()) {
             netData.forEach {
                 dbRepository.addTask(it)
@@ -34,10 +38,6 @@ class GetTasksUseCase(
             }
 
             return emptyList()
-        }
-
-        if (netData == null) {
-            return dbData
         }
 
         netData.forEach { netTask ->

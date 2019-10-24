@@ -6,6 +6,7 @@ import com.example.todo.data.db.common.AppDatabase
 import com.example.todo.data.db.repository.DbRepository
 import com.example.todo.data.local.LocalRepository
 import com.example.todo.data.network.repository.NetworkRepository
+import com.example.todo.data.network.utils.NetworkStateUtil
 import com.example.todo.data.network.utils.TaskApiProvider
 import com.example.todo.domain.repository.IDbRepository
 import com.example.todo.domain.repository.ILocalRepository
@@ -20,6 +21,8 @@ import org.koin.dsl.module
 
 class TodoApp : Application() {
     private val koinModule = module {
+        single { NetworkStateUtil(androidContext()) }
+
         single {
             Room.databaseBuilder(androidContext(), AppDatabase::class.java, "todo_db").build()
         }
@@ -30,7 +33,7 @@ class TodoApp : Application() {
                 get<AppDatabase>().getPriorityDao()
             ) as IDbRepository
         }
-        single { NetworkRepository(TaskApiProvider.create()) as INetworkRepository }
+        single { NetworkRepository(TaskApiProvider.create(), get()) as INetworkRepository }
         single { LocalRepository(androidContext()) as ILocalRepository }
 
         single { RegisterUseCase(get()) }

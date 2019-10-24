@@ -2,11 +2,15 @@ package com.example.todo.data.network.repository
 
 import com.example.todo.data.network.NetworkConstants
 import com.example.todo.data.network.mapper.NetworkMapper
+import com.example.todo.data.network.utils.NetworkStateUtil
 import com.example.todo.domain.entity.*
 import com.example.todo.domain.repository.INetworkRepository
 import retrofit2.await
 
-class NetworkRepository(private val taskApiService: TaskApiService) :
+class NetworkRepository(
+    private val taskApiService: TaskApiService,
+    private val networkStateUtil: NetworkStateUtil
+) :
     INetworkRepository {
     override suspend fun registerUser(newUser: NewUser): UserToken =
         NetworkMapper.userTokenFromNetwork(
@@ -17,11 +21,16 @@ class NetworkRepository(private val taskApiService: TaskApiService) :
             ).await()
         )
 
-    override suspend fun login(loginUser: LoginUser): UserToken =
+    override suspend fun login(loginUser: LoginUser): UserToken? =
         NetworkMapper.userTokenFromNetwork(taskApiService.login(loginUser).await())
 
-    override suspend fun getTasks(token: String): List<Task> =
-        NetworkMapper.taskListFromNetwork(taskApiService.getTasks("${NetworkConstants.TOKEN_HEADER} $token").await())
+    override suspend fun getTasks(token: String): List<Task>? {
+        return if (networkStateUtil.isOnline) {
+            NetworkMapper.taskListFromNetwork(taskApiService.getTasks("${NetworkConstants.TOKEN_HEADER} $token").await())
+        }
+        else null
+    }
+
 
     override suspend fun getCategories(token: String): List<Category> =
         taskApiService.getCategories("${NetworkConstants.TOKEN_HEADER} $token").await()
