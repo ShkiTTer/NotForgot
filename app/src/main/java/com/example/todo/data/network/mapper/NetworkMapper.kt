@@ -22,7 +22,7 @@ object NetworkMapper {
     fun newTask(task: Task): NewTask = NewTask(
         task.title,
         task.description,
-        task.deadline?.time,
+        task.deadline?.time?.toInt(),
         task.category.id,
         task.priority.id,
         task.done,
