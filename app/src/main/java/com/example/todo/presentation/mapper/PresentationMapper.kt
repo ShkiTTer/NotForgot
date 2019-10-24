@@ -33,6 +33,7 @@ object PresentationMapper {
                 it.title,
                 it.description,
                 it.created,
+                it.synchronized,
                 it.id,
                 it.deadline,
                 category,
@@ -61,7 +62,8 @@ object PresentationMapper {
             task.deadline,
             task.priority!!,
             categoryToModel(task.category!!),
-            task.id
+            task.id,
+            task.synchronized
         )
 
     fun categoryToModel(category: Category): com.example.todo.domain.entity.Category =

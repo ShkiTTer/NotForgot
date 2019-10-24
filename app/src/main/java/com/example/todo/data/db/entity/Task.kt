@@ -8,11 +8,11 @@ import java.util.*
 @Entity
 data class Task(
     var title: String = "",
-    var description: String? = null,
+    var description: String = "",
     var created: Date = Date(),
     var deadline: Date? = null,
-    @Embedded var category: Category? = null,
-    @Embedded var priority: Priority? = null,
+    @Embedded var category: Category = Category(),
+    @Embedded var priority: Priority = Priority(),
     var done: Int = 0,
     var synchronized: Boolean = false,
     @PrimaryKey(autoGenerate = true) var task_id: Int = 0

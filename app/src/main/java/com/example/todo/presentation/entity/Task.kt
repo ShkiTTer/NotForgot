@@ -11,6 +11,7 @@ data class Task(
     private var _title: String = "",
     private var _description: String = "",
     var created: Date = Date(),
+    var synchronized: Boolean = false,
     val id: Int = 0,
     var deadline: Date? = null,
     private var _category: Category? = null,

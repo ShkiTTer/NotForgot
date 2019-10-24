@@ -65,7 +65,7 @@ class MainViewModel(
 
         deleteTaskUseCase.apply {
             token = this@MainViewModel.token
-            taskId = task.id
+            this.task = PresentationMapper.taskToModel(task)
             execute()
         }
     }

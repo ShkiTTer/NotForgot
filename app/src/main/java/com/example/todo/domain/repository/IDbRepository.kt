@@ -6,6 +6,7 @@ import com.example.todo.domain.entity.Task
 
 interface IDbRepository {
     suspend fun getTasks(): List<Task>
+    suspend fun getTaskById(taskId: Int): Task
     suspend fun getCategories(): List<Category>
     suspend fun getPriorities(): List<Priority>
 

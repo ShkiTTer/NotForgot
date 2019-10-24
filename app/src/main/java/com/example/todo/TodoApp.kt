@@ -38,12 +38,12 @@ class TodoApp : Application() {
         single { GetTokenUseCase(get()) }
         single { SaveTokenUseCase(get()) }
         single { RemoveTokenUseCase(get()) }
-        single { GetTasksUseCase(get()) }
+        single { GetTasksUseCase(get(), get()) }
         single { GetCategoriesUseCase(get()) }
         single { GetPrioritiesUseCase(get()) }
         single { CreateTaskUseCase(get()) }
         single { UpdateTaskUseCase(get()) }
-        single { DeleteTaskUseCase(get()) }
+        single { DeleteTaskUseCase(get(), get()) }
 
         single { TaskListAdapter() }
 

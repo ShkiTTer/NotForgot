@@ -3,6 +3,7 @@ package com.example.todo.data.db.repository
 import com.example.todo.data.db.dao.CategoryDao
 import com.example.todo.data.db.dao.PriorityDao
 import com.example.todo.data.db.dao.TaskDao
+import com.example.todo.data.db.mapper.DbMapper
 import com.example.todo.domain.entity.Category
 import com.example.todo.domain.entity.Priority
 import com.example.todo.domain.entity.Task
@@ -14,31 +15,35 @@ class DbRepository(
     private val priorityDao: PriorityDao
 ): IDbRepository {
     override suspend fun getTasks(): List<Task> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return taskDao.getAllTasks().map { DbMapper.taskToModel(it) }
+    }
+
+    override suspend fun getTaskById(taskId: Int): Task {
+        return DbMapper.taskToModel(taskDao.getTaskById(taskId))
     }
 
     override suspend fun getCategories(): List<Category> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return categoryDao.getAll().map { DbMapper.categoryToModel(it) }
     }
 
     override suspend fun getPriorities(): List<Priority> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return priorityDao.getAll().map { DbMapper.priorityToModel(it) }
     }
 
     override suspend fun addTask(task: Task) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        taskDao.insertTask(DbMapper.taskToDb(task))
     }
 
     override suspend fun updateTask(task: Task) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        taskDao.updateTask(DbMapper.taskToDb(task))
     }
 
     override suspend fun deleteTask(task: Task) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        taskDao.deleteTask(DbMapper.taskToDb(task))
     }
 
     override suspend fun addCategory(category: Category) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        categoryDao.add(DbMapper.categoryToDb(category))
     }
 
 }

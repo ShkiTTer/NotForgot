@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Category(
-    @PrimaryKey(autoGenerate = true) val categoryId: Int,
-    val categoryName: String,
-    val categorySynchronized: Boolean
+    @PrimaryKey(autoGenerate = true) val categoryId: Int = 0,
+    val categoryName: String = "",
+    val categorySynchronized: Boolean = false
 )

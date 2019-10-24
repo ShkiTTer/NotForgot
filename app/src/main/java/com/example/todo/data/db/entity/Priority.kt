@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Priority(
-    @PrimaryKey val priorityId: Int,
-    val priorityName: String,
-    val color: String
+    @PrimaryKey val priorityId: Int = 0,
+    val priorityName: String = "",
+    val color: String = ""
 )

@@ -10,5 +10,6 @@ data class Task(
     val deadline: Date?,
     val priority: Priority,
     val category: Category,
-    val id: Int = 0
+    val id: Int = 0,
+    var synchronized: Boolean = true
 )
