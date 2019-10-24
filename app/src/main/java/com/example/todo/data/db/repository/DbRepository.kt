@@ -51,4 +51,9 @@ class DbRepository(
         categoryDao.clear()
         priorityDao.clear()
     }
+
+    override suspend fun replacePriorities(priorities: List<Priority>) {
+        priorityDao.clear()
+        priorityDao.addAll(priorities.map { DbMapper.priorityToDb(it) })
+    }
 }
