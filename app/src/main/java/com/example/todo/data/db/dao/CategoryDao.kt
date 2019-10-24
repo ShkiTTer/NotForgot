@@ -12,4 +12,7 @@ interface CategoryDao {
 
     @Insert
     fun add(category: Category)
+
+    @Query("Delete From Category")
+    fun clear()
 }

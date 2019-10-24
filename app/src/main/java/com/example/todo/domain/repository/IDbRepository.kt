@@ -15,4 +15,6 @@ interface IDbRepository {
     suspend fun deleteTask(task: Task)
 
     suspend fun addCategory(category: Category)
+
+    suspend fun clearData()
 }

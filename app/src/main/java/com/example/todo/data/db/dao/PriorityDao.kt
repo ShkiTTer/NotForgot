@@ -8,4 +8,7 @@ import com.example.todo.data.db.entity.Priority
 interface PriorityDao {
     @Query("Select * From Priority")
     fun getAll(): List<Priority>
+
+    @Query("Delete From Priority")
+    fun clear()
 }

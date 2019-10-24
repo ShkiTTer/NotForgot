@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.todo.domain.entity.Task
 import com.example.todo.domain.usecase.DeleteTaskUseCase
 import com.example.todo.domain.usecase.GetTasksUseCase
-import com.example.todo.domain.usecase.RemoveTokenUseCase
+import com.example.todo.domain.usecase.ClearDataUseCase
 import com.example.todo.domain.usecase.UpdateTaskUseCase
 import com.example.todo.domain.usecase.common.UseCase
 import com.example.todo.presentation.interfaces.ListItem
@@ -15,7 +15,7 @@ class MainViewModel(
     private val getTasksUseCase: GetTasksUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
-    private val removeTokenUseCase: RemoveTokenUseCase
+    private val clearDataUseCase: ClearDataUseCase
 ) : ViewModel() {
     val taskList = MutableLiveData<List<ListItem>>()
     var token: String? = null
@@ -71,6 +71,6 @@ class MainViewModel(
     }
 
     fun clearUserData() {
-        removeTokenUseCase.execute()
+        clearDataUseCase.execute()
     }
 }
