@@ -10,6 +10,9 @@ import com.example.todo.R
 import com.example.todo.databinding.FragmentTaskInfoBinding
 import com.example.todo.presentation.entity.TaskAction
 import com.example.todo.presentation.viewmodel.TaskInfoViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TaskInfoFragment : Fragment() {
@@ -41,7 +44,11 @@ class TaskInfoFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        taskInfoViewModel.getTask()
+
+        GlobalScope.launch {
+            delay(200)
+            taskInfoViewModel.getTask()
+        }
     }
 
     private fun setupClickListeners() {
