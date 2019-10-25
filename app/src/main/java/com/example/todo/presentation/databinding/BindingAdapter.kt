@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.InverseBindingAdapter
 import androidx.databinding.InverseBindingListener
@@ -12,7 +13,6 @@ import com.example.todo.domain.entity.Priority
 import com.example.todo.presentation.adapters.CategoryAdapter
 import com.example.todo.presentation.adapters.PriorityAdapter
 import com.example.todo.presentation.entity.Category
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import java.text.SimpleDateFormat
 import java.util.*
@@ -123,16 +123,30 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter("app:color")
-    fun setColor(view: View, color: String) {
+    fun setColor(view: View, color: String?) {
+        if (color == null) return
         view.setBackgroundColor(Color.parseColor(color))
     }
 
     @JvmStatic
-    @BindingAdapter("app:deadline")
-    fun setDeadline(textInputEditText: TextInputEditText, deadline: Date?) {
-        val sdf = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG, Locale("ru"))
+    @BindingAdapter("app:date")
+    fun setDeadline(view: TextView, date: Date?) {
+        val sdf = SimpleDateFormat.getDateInstance(SimpleDateFormat.DATE_FIELD, Locale("ru"))
 
-        if (deadline == null) textInputEditText.text = null
-        else textInputEditText.setText(sdf.format(deadline))
+        if (date == null) view.text = null
+        else view.text = sdf.format(date)
+    }
+
+    @JvmStatic
+    @BindingAdapter("app:done")
+    fun setDone(view: TextView, done: Int) {
+        if (done == 1) {
+            view.setText(R.string.task_done)
+            view.setTextColor(view.context.getColor(R.color.colorTaskDone))
+        }
+        else {
+            view.setText(R.string.task_not_done)
+            view.setTextColor(view.context.getColor(R.color.colorTaskNotDone))
+        }
     }
 }

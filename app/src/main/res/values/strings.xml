@@ -34,4 +34,7 @@
     <string name="btn_save_task">Сохранить</string>
 
     <string name="action_logout">Logout</string>
+
+    <string name="task_done">Выполнено</string>
+    <string name="task_not_done">Не выполнено</string>
 </resources>

@@ -2,9 +2,15 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".presentation.ui.TaskViewFragment">
+    tools:context=".presentation.ui.TaskInfoFragment">
 
-    <data></data>
+    <data>
+        <import type="androidx.lifecycle.LiveData"/>
+
+        <variable
+            name="task"
+            type="androidx.lifecycle.MutableLiveData&lt;com.example.todo.domain.entity.Task>" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -19,6 +25,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Погладить песика"
+            android:text="@{task.title}"
             style="@style/TitleText"/>
 
         <androidx.cardview.widget.CardView
@@ -45,7 +52,8 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="08.10.2019" />
+                    tools:text="08.10.2019"
+                    app:date="@{task.created}"/>
 
                 <TextView
                     android:id="@+id/textView6"
@@ -56,7 +64,8 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Не выполнено" />
+                    tools:text="Не выполнено"
+                    app:done="@{task.done}"/>
 
                 <TextView
                     android:id="@+id/textView9"
@@ -68,7 +77,8 @@
                     android:drawablePadding="8dp"
                     app:layout_constraintBottom_toTopOf="@+id/textView7"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="21.02.2020" />
+                    tools:text="21.02.2020"
+                    app:date="@{task.deadline}"/>
 
                 <TextView
                     android:id="@+id/textView7"
@@ -79,7 +89,8 @@
                     android:drawablePadding="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="Работа" />
+                    tools:text="Работа"
+                    android:text="@{task.category.name}"/>
 
                 <TextView
                     android:id="@+id/textView8"
@@ -94,7 +105,9 @@
                     android:textColor="@android:color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    tools:text="Важно" />
+                    tools:text="Важно"
+                    android:text="@{task.priority.name}"
+                    app:color="@{task.priority.color}"/>
 
                 <TextView
                     android:id="@+id/textView10"
@@ -109,6 +122,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView5"
                     app:lineHeight="21dp"
+                    android:text="@{task.description}"
                     tools:text="Любя, позвать песика и дать ему вкусняшку. Нежно погладить влажный носик. Потом почесать за левым ушком, а затем за правым. Тихонько приподнять мордочку песеля и почухать грудь, опускаясь от шеи к лапкам. Не нарушая покоя и удовольствия песика, положить его на бочок. Двумя руками чесать бочок, пока песик не начнет дрыгать лапкой. Затем перевернуть на другой бок и повторить. Заслужив доверие песика, можно перевернуть его пузиком вверх и аккуратно почесать его.\n\nПосле можно спокойно заниматься делами, оставив песика отдыхать." />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

@@ -171,7 +171,7 @@
                         android:editable="false"
                         android:focusableInTouchMode="false"
                         android:hint="@string/hint_deadline_task"
-                        app:deadline="@{task.deadline}"
+                        app:date="@{task.deadline}"
                         android:paddingBottom="16dp"
                         android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>

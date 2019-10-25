@@ -128,6 +128,7 @@ class MainActivity : AppCompatActivity() {
                 intent.apply {
                     putExtra(PresentationConstants.EXTRA_TOKEN, mainViewModel.token)
                     putExtra(PresentationConstants.EXTRA_TASK_ACTION, TaskAction.VIEW)
+                    putExtra(PresentationConstants.EXTRA_TASK_ID, taskId)
                 }
 
                 startActivity(intent)
