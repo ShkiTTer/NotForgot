@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.todo.R
 import com.example.todo.databinding.FragmentTaskInfoBinding
+import com.example.todo.presentation.entity.TaskAction
 import com.example.todo.presentation.viewmodel.TaskInfoViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -33,6 +34,8 @@ class TaskInfoFragment : Fragment() {
             task = taskInfoViewModel.task
         }
 
+        setupClickListeners()
+
         return binding.root
     }
 
@@ -41,14 +44,31 @@ class TaskInfoFragment : Fragment() {
         taskInfoViewModel.getTask()
     }
 
+    private fun setupClickListeners() {
+        binding.btnEdit.setOnClickListener {
+            fragmentManager?.beginTransaction()
+                ?.replace(
+                    R.id.taskFragmentContainer,
+                    AddEditTaskFragment.newInstance(
+                        TaskAction.EDIT,
+                        arguments?.getString(TOKEN),
+                        taskInfoViewModel.taskId
+                    )
+                )
+                ?.addToBackStack(null)
+                ?.commit()
+        }
+    }
 
     companion object {
         private const val TASK_ID = "task_id"
+        private const val TOKEN = "token"
 
         @JvmStatic
-        fun newInstance(taskId: Int?) = TaskInfoFragment().apply {
+        fun newInstance(taskId: Int?, token: String?) = TaskInfoFragment().apply {
             val args = Bundle().apply {
-                putInt(TASK_ID, taskId!!)
+                if (taskId != null) putInt(TASK_ID, taskId)
+                putString(TOKEN, token)
             }
 
             arguments = args

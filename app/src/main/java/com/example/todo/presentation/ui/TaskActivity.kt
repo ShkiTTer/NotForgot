@@ -19,7 +19,7 @@ class TaskActivity : AppCompatActivity() {
         with(supportFragmentManager.beginTransaction()) {
             when (action) {
                 TaskAction.VIEW -> {
-                    add(R.id.taskFragmentContainer, TaskInfoFragment.newInstance(taskId))
+                    add(R.id.taskFragmentContainer, TaskInfoFragment.newInstance(taskId, token))
                 }
                 TaskAction.ADD -> {
                     add(R.id.taskFragmentContainer, AddEditTaskFragment.newInstance(action, token))

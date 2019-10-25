@@ -56,7 +56,7 @@ class TodoApp : Application() {
         viewModel { LoginViewModel(get(), get()) }
         viewModel { AutoLoginViewModel(get()) }
         viewModel { MainViewModel(get(), get(), get(), get()) }
-        viewModel { AddEditViewModel(get(), get(), get(), get()) }
+        viewModel { AddEditViewModel(get(), get(), get(), get(), get(), get()) }
         viewModel { TaskInfoViewModel(get()) }
     }
 

@@ -29,18 +29,7 @@ object PresentationMapper {
 
         tasks.sortedBy { it.category.id }.forEach {
             val category = categoryToPresentation(it.category)
-            val task = com.example.todo.presentation.entity.Task(
-                it.title,
-                it.description,
-                it.created,
-                it.synchronized,
-                it.id,
-                it.deadline,
-                category,
-                it.priority,
-                it.done == 1
-
-            )
+            val task = taskToPresentation(it)
 
             if (!listItems.contains(category)) listItems.add(category)
 
@@ -68,4 +57,17 @@ object PresentationMapper {
 
     fun categoryToModel(category: Category): com.example.todo.domain.entity.Category =
         com.example.todo.domain.entity.Category(category.id, category.name)
+
+    fun taskToPresentation(task: Task): com.example.todo.presentation.entity.Task =
+        com.example.todo.presentation.entity.Task(
+            task.title,
+            task.description,
+            task.created,
+            task.synchronized,
+            task.id,
+            task.deadline,
+            categoryToPresentation(task.category),
+            task.priority,
+            task.done == 1
+        )
 }

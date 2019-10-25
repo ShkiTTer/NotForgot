@@ -32,6 +32,7 @@ class AddEditTaskFragment : Fragment() {
 
         addEditViewModel.taskAction = args.getSerializable(TASK_ACTION) as TaskAction
         addEditViewModel.token = args.getString(TOKEN)
+        addEditViewModel.taskId = args.getInt(TASK_ID)
     }
 
     override fun onCreateView(
@@ -53,6 +54,10 @@ class AddEditTaskFragment : Fragment() {
 
         setupClickListeners()
 
+        if (addEditViewModel.taskAction == TaskAction.EDIT) {
+            addEditViewModel.getTask()
+        }
+
         addEditViewModel.getCategories()
         addEditViewModel.getPriorities()
 
@@ -65,10 +70,20 @@ class AddEditTaskFragment : Fragment() {
         }
 
         binding.btnSaveTask.setOnClickListener {
-            addEditViewModel.createTask()
-            Toast.makeText(applicationContext, R.string.success_add_task, Toast.LENGTH_LONG)
-                .show()
-            this.activity?.finish()
+            if (addEditViewModel.taskAction == TaskAction.EDIT) {
+                addEditViewModel.updateTask()
+                Toast.makeText(applicationContext, R.string.success_add_task, Toast.LENGTH_LONG)
+                    .show()
+
+                fragmentManager?.popBackStack()
+            }
+            else {
+                addEditViewModel.createTask()
+                Toast.makeText(applicationContext, R.string.success_add_task, Toast.LENGTH_LONG)
+                    .show()
+
+                this.activity?.finish()
+            }
         }
 
         binding.ivAddCategory.setOnClickListener {
@@ -123,12 +138,15 @@ class AddEditTaskFragment : Fragment() {
     companion object {
         private const val TASK_ACTION = "task_action"
         private const val TOKEN = "token"
+        private const val TASK_ID = "task_id"
 
         @JvmStatic
-        fun newInstance(taskAction: TaskAction, token: String?) = AddEditTaskFragment().apply {
+        fun newInstance(taskAction: TaskAction, token: String?, taskId: Int? = null) = AddEditTaskFragment().apply {
             val args = Bundle().apply {
                 putString(TOKEN, token)
                 putSerializable(TASK_ACTION, taskAction)
+
+                if (taskId != null) putInt(TASK_ID, taskId)
             }
 
             arguments = args
