@@ -25,101 +25,62 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("app:categories")
-    fun setCategories(spinner: Spinner, categories: List<Category>?) {
-        spinner.adapter = CategoryAdapter(
-            spinner.context,
-            R.layout.item_spinner,
-            categories ?: emptyList()
-        )
-    }
-
-    @JvmStatic
-    @BindingAdapter("app:selectedCategory")
+    @BindingAdapter(
+        "app:categories",
+        "app:selectedCategory",
+        "selectedCategoryAttrChanged",
+        requireAll = false
+    )
     fun setSelectedCategory(
         spinner: Spinner,
-        category: Category?
+        categories: List<Category>?,
+        category: Category?,
+        listener: InverseBindingListener
     ) {
+        if (categories == null) return
+
+        spinner.adapter = CategoryAdapter(spinner.context, R.layout.item_spinner, categories)
+
         if (category == null) return
 
-        spinner.setSelection((spinner.adapter as CategoryAdapter).getItemPosition(category))
+        setCurrentSelection(spinner, category)
+        setSpinnerListener(spinner, listener)
     }
 
     @JvmStatic
-    @InverseBindingAdapter(
-        attribute = "app:selectedCategory",
-        event = "selectedCategoryAttrChanged"
-    )
+    @InverseBindingAdapter(attribute = "app:selectedCategory")
     fun getSelectedCategory(spinner: Spinner): Category =
         spinner.selectedItem as Category
 
     @JvmStatic
-    @BindingAdapter("selectedCategoryAttrChanged")
-    fun bindCategoryChanged(spinner: Spinner, inverseBindingListener: InverseBindingListener) {
-        val listener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                inverseBindingListener.onChange()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                inverseBindingListener.onChange()
-            }
-        }
-
-        spinner.onItemSelectedListener = listener
-    }
-
-    @JvmStatic
-    @BindingAdapter("app:priorities")
-    fun setPriorities(spinner: Spinner, priorities: List<Priority>?) {
-        spinner.adapter =
-            PriorityAdapter(spinner.context, R.layout.item_spinner, priorities ?: emptyList())
-    }
-
-    @JvmStatic
-    @BindingAdapter("app:selectedPriority")
+    @BindingAdapter(
+        "app:priorities",
+        "app:selectedPriority",
+        "selectedPriorityAttrChanged",
+        requireAll = false
+    )
     fun setSelectedPriority(
         spinner: Spinner,
-        priority: Priority?
+        priorities: List<Priority>?,
+        priority: Priority?,
+        listener: InverseBindingListener
     ) {
+        if (priorities == null) return
+
+        spinner.adapter =
+            PriorityAdapter(spinner.context, R.layout.item_spinner, priorities)
+
         if (priority == null) return
 
-        spinner.setSelection((spinner.adapter as PriorityAdapter).getItemPosition(priority))
+        setCurrentSelection(spinner, priority)
+        setSpinnerListener(spinner, listener)
     }
 
     @JvmStatic
-    @InverseBindingAdapter(
-        attribute = "app:selectedPriority",
-        event = "selectedPriorityAttrChanged"
-    )
+    @InverseBindingAdapter(attribute = "app:selectedPriority")
     fun getSelectedPriority(spinner: Spinner): Priority =
         spinner.selectedItem as Priority
 
-    @JvmStatic
-    @BindingAdapter("selectedPriorityAttrChanged")
-    fun bindPriorityChanged(spinner: Spinner, inverseBindingListener: InverseBindingListener) {
-        val listener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                inverseBindingListener.onChange()
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                inverseBindingListener.onChange()
-            }
-        }
-
-        spinner.onItemSelectedListener = listener
-    }
 
     @JvmStatic
     @BindingAdapter("app:color")
@@ -143,10 +104,32 @@ object BindingAdapter {
         if (done == 1) {
             view.setText(R.string.task_done)
             view.setTextColor(view.context.getColor(R.color.colorTaskDone))
-        }
-        else {
+        } else {
             view.setText(R.string.task_not_done)
             view.setTextColor(view.context.getColor(R.color.colorTaskNotDone))
         }
+    }
+
+    private fun setSpinnerListener(spinner: Spinner, listener: InverseBindingListener) {
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) = listener.onChange()
+
+            override fun onNothingSelected(adapterView: AdapterView<*>) = listener.onChange()
+        }
+    }
+
+    private fun setCurrentSelection(spinner: Spinner, selectedItem: Any): Boolean {
+        for (index in 0 until spinner.adapter.count) {
+            if (spinner.getItemAtPosition(index) == selectedItem) {
+                spinner.setSelection(index)
+                return true
+            }
+        }
+        return false
     }
 }

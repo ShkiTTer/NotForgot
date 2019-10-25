@@ -54,12 +54,12 @@ class AddEditTaskFragment : Fragment() {
 
         setupClickListeners()
 
+        addEditViewModel.getCategories()
+        addEditViewModel.getPriorities()
+
         if (addEditViewModel.taskAction == TaskAction.EDIT) {
             addEditViewModel.getTask()
         }
-
-        addEditViewModel.getCategories()
-        addEditViewModel.getPriorities()
 
         return binding.root
     }
@@ -70,17 +70,16 @@ class AddEditTaskFragment : Fragment() {
         }
 
         binding.btnSaveTask.setOnClickListener {
+            Toast.makeText(applicationContext, R.string.success_add_task, Toast.LENGTH_LONG)
+                .show()
+
             if (addEditViewModel.taskAction == TaskAction.EDIT) {
                 addEditViewModel.updateTask()
-                Toast.makeText(applicationContext, R.string.success_add_task, Toast.LENGTH_LONG)
-                    .show()
 
                 fragmentManager?.popBackStack()
             }
             else {
                 addEditViewModel.createTask()
-                Toast.makeText(applicationContext, R.string.success_add_task, Toast.LENGTH_LONG)
-                    .show()
 
                 this.activity?.finish()
             }

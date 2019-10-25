@@ -65,17 +65,7 @@ class AddEditViewModel(
         createTaskUseCase.apply {
             token = this@AddEditViewModel.token
             task = PresentationMapper.taskToModel(this@AddEditViewModel.task.value!!)
-            execute(object : UseCase.Callback<Unit> {
-                override fun onComplete(result: Unit?) {
-                    if (result == null) {
-                        println("Error")
-                    }
-                }
-
-                override fun onError(t: Throwable) {
-                    t.printStackTrace()
-                }
-            })
+            execute()
         }
     }
 
