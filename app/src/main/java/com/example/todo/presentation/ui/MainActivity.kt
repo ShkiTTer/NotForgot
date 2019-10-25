@@ -123,7 +123,14 @@ class MainActivity : AppCompatActivity() {
     private fun setupListAdapter() {
         taskListAdapter.setOnTaskClickListener(object : OnTaskClickListener {
             override fun onClick(taskId: Int) {
+                val intent = Intent(this@MainActivity, TaskActivity::class.java)
 
+                intent.apply {
+                    putExtra(PresentationConstants.EXTRA_TOKEN, mainViewModel.token)
+                    putExtra(PresentationConstants.EXTRA_TASK_ACTION, TaskAction.VIEW)
+                }
+
+                startActivity(intent)
             }
         })
 
