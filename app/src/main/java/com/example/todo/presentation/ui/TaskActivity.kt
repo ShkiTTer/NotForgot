@@ -1,6 +1,7 @@
 package com.example.todo.presentation.ui
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.todo.R
 import com.example.todo.presentation.common.PresentationConstants
@@ -29,5 +30,18 @@ class TaskActivity : AppCompatActivity() {
 
             commit()
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            if (supportFragmentManager.backStackEntryCount > 0) {
+                supportFragmentManager.popBackStack()
+            }
+            else finish()
+
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 }
