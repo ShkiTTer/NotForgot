@@ -9,6 +9,7 @@
         <import type="com.example.todo.presentation.entity.Task"/>
         <import type="com.example.todo.presentation.common.ObservableLiveData"/>
         <import type="androidx.lifecycle.LiveData"/>
+        <import type="com.example.todo.presentation.utils.TaskFormValidate"/>
 
         <variable
             name="task"
@@ -64,7 +65,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:error="@{task.title == `` ? @string/error_empty_field : null}">
+                    app:error="@{!TaskFormValidate.INSTANCE.checkTitle(task.title) ? @string/error_empty_field : null}">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:hint="@string/hint_title_task"
@@ -87,7 +88,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textInputLayout5"
-                    app:error="@{task.description == `` ? @string/error_empty_field : null}">
+                    app:error="@{!TaskFormValidate.INSTANCE.checkDescription(task.description) ? @string/error_empty_field : null}">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"

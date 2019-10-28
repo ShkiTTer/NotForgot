@@ -10,6 +10,7 @@ import com.example.todo.presentation.common.ObservableLiveData
 import com.example.todo.presentation.entity.Task
 import com.example.todo.presentation.entity.TaskAction
 import com.example.todo.presentation.mapper.PresentationMapper
+import com.example.todo.presentation.utils.TaskFormValidate
 
 class AddEditViewModel(
     private val getCategoriesUseCase: GetCategoriesUseCase,
@@ -62,10 +63,14 @@ class AddEditViewModel(
     }
 
     fun createTask() {
-        createTaskUseCase.apply {
-            token = this@AddEditViewModel.token
-            task = PresentationMapper.taskToModel(this@AddEditViewModel.task.value!!)
-            execute()
+        val tempTask = task.value ?: return
+
+        if (TaskFormValidate.validateTask(tempTask)) {
+            createTaskUseCase.apply {
+                token = this@AddEditViewModel.token
+                task = PresentationMapper.taskToModel(tempTask)
+                execute()
+            }
         }
     }
 
@@ -103,10 +108,12 @@ class AddEditViewModel(
     fun updateTask() {
         val task = this@AddEditViewModel.task.value ?: return
 
-        updateTaskUseCase.apply {
-            this.token = this@AddEditViewModel.token
-            this.task = PresentationMapper.taskToModel(task)
-            execute()
+        if (TaskFormValidate.validateTask(task)) {
+            updateTaskUseCase.apply {
+                this.token = this@AddEditViewModel.token
+                this.task = PresentationMapper.taskToModel(task)
+                execute()
+            }
         }
     }
 }
