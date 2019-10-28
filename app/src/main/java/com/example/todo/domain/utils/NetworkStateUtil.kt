@@ -1,4 +1,4 @@
-package com.example.todo.data.network.utils
+package com.example.todo.domain.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

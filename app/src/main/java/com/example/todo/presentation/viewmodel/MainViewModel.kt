@@ -3,11 +3,12 @@ package com.example.todo.presentation.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.todo.domain.entity.Task
+import com.example.todo.domain.usecase.ClearDataUseCase
 import com.example.todo.domain.usecase.DeleteTaskUseCase
 import com.example.todo.domain.usecase.GetTasksUseCase
-import com.example.todo.domain.usecase.ClearDataUseCase
 import com.example.todo.domain.usecase.UpdateTaskUseCase
 import com.example.todo.domain.usecase.common.UseCase
+import com.example.todo.domain.utils.NetworkStateUtil
 import com.example.todo.presentation.interfaces.ListItem
 import com.example.todo.presentation.mapper.PresentationMapper
 
@@ -15,11 +16,14 @@ class MainViewModel(
     private val getTasksUseCase: GetTasksUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
-    private val clearDataUseCase: ClearDataUseCase
+    private val clearDataUseCase: ClearDataUseCase,
+    private val networkStateUtil: NetworkStateUtil
 ) : ViewModel() {
     val taskList = MutableLiveData<List<ListItem>>()
     var token: String? = null
     val tasks = MutableLiveData<List<Task>>()
+
+    val isNetworkEnabled = networkStateUtil.isOnline
 
     init {
         tasks.observeForever {
@@ -58,7 +62,8 @@ class MainViewModel(
     }
 
     fun deleteTask(position: Int) {
-        val task = taskList.value?.toMutableList()?.removeAt(position) as com.example.todo.presentation.entity.Task
+        val task =
+            taskList.value?.toMutableList()?.removeAt(position) as com.example.todo.presentation.entity.Task
         tasks.value = tasks.value?.toMutableList()?.apply {
             remove(this.find { it.id == task.id })
         }

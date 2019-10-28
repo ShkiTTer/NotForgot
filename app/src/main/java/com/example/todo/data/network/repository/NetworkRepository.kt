@@ -2,7 +2,7 @@ package com.example.todo.data.network.repository
 
 import com.example.todo.data.network.NetworkConstants
 import com.example.todo.data.network.mapper.NetworkMapper
-import com.example.todo.data.network.utils.NetworkStateUtil
+import com.example.todo.domain.utils.NetworkStateUtil
 import com.example.todo.domain.entity.*
 import com.example.todo.domain.repository.INetworkRepository
 import retrofit2.await

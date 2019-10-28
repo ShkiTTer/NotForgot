@@ -5,7 +5,6 @@ import com.example.todo.domain.repository.IDbRepository
 import com.example.todo.domain.repository.INetworkRepository
 import com.example.todo.domain.usecase.common.UseCase
 import com.example.todo.domain.utils.CompareUtil
-import java.util.HashSet
 
 class GetTasksUseCase(
     private val networkRepository: INetworkRepository,
@@ -46,19 +45,15 @@ class GetTasksUseCase(
 
             if (dbTask == null) {
                 dbRepository.addTask(netTask)
-            }
-            else if (CompareUtil.compareTask(netTask, dbTask)) {
-                if (netTask.synchronized != dbTask.synchronized)
-                {
+            } else if (CompareUtil.compareTask(netTask, dbTask)) {
+                if (netTask.synchronized != dbTask.synchronized) {
                     dbTask.synchronized = true
                     dbRepository.updateTask(dbTask)
                 }
-            }
-            else {
+            } else {
                 if (!dbTask.synchronized) {
                     networkRepository.updateTask(tempToken, dbTask)
-                }
-                else dbRepository.updateTask(netTask)
+                } else dbRepository.updateTask(netTask)
             }
 
             data.add(netTask)

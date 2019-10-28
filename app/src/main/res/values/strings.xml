@@ -37,4 +37,6 @@
 
     <string name="task_done">Выполнено</string>
     <string name="task_not_done">Не выполнено</string>
+
+    <string name="synchronize">Синхронизация данных…</string>
 </resources>

@@ -6,7 +6,7 @@ import com.example.todo.data.db.common.AppDatabase
 import com.example.todo.data.db.repository.DbRepository
 import com.example.todo.data.local.LocalRepository
 import com.example.todo.data.network.repository.NetworkRepository
-import com.example.todo.data.network.utils.NetworkStateUtil
+import com.example.todo.domain.utils.NetworkStateUtil
 import com.example.todo.data.network.utils.TaskApiProvider
 import com.example.todo.domain.repository.IDbRepository
 import com.example.todo.domain.repository.ILocalRepository
@@ -55,7 +55,7 @@ class TodoApp : Application() {
         viewModel { RegisterViewModel(get(), get()) }
         viewModel { LoginViewModel(get(), get()) }
         viewModel { AutoLoginViewModel(get()) }
-        viewModel { MainViewModel(get(), get(), get(), get()) }
+        viewModel { MainViewModel(get(), get(), get(), get(), get()) }
         viewModel { AddEditViewModel(get(), get(), get(), get(), get(), get()) }
         viewModel { TaskInfoViewModel(get()) }
     }
