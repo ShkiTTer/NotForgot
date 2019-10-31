@@ -20,7 +20,6 @@ class AddEditViewModel(
     private val getTaskByIdUseCase: GetTaskByIdUseCase,
     private val updateTaskUseCase: UpdateTaskUseCase
 ) : ViewModel() {
-
     var token: String? = null
     lateinit var taskAction: TaskAction
     var taskId: Int? = null

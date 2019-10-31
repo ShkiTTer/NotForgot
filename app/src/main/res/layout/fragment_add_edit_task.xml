@@ -10,6 +10,7 @@
         <import type="com.example.todo.presentation.common.ObservableLiveData"/>
         <import type="androidx.lifecycle.LiveData"/>
         <import type="com.example.todo.presentation.utils.TaskFormValidate"/>
+        <import type="com.example.todo.presentation.entity.TaskAction"/>
 
         <variable
             name="task"
@@ -22,6 +23,10 @@
         <variable
             name="priorities"
             type="LiveData&lt;java.util.List&lt;com.example.todo.domain.entity.Priority>>" />
+
+        <variable
+            name="taskAction"
+            type="TaskAction" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,7 +41,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/title_add_task"
+            android:text="@{taskAction == TaskAction.EDIT ? @string/title_edit_task : @string/title_add_task}"
             style="@style/TitleText"/>
 
         <androidx.cardview.widget.CardView

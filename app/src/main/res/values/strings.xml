@@ -42,4 +42,6 @@
     <string name="dialog_save_message">Сохранить?</string>
     <string name="dialog_save_positive_btn">Да!</string>
     <string name="dialog_save_negative_btn">Отмена</string>
+
+    <string name="title_edit_task">Изменить задачу</string>
 </resources>

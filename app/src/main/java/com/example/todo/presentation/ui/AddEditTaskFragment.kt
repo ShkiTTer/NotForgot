@@ -52,6 +52,7 @@ class AddEditTaskFragment : Fragment() {
             task = addEditViewModel.task
             categories = addEditViewModel.categories
             priorities = addEditViewModel.priorities
+            taskAction = addEditViewModel.taskAction
         }
 
         addEditViewModel.task.observeForever {
@@ -119,8 +120,7 @@ class AddEditTaskFragment : Fragment() {
                 addEditViewModel.updateTask()
 
                 fragmentManager?.popBackStack()
-            }
-            else {
+            } else {
                 addEditViewModel.createTask()
 
                 this.activity?.finish()
@@ -168,7 +168,11 @@ class AddEditTaskFragment : Fragment() {
                 if (name.trim().isNotEmpty()) {
                     addEditViewModel.createCategory()
 
-                    Toast.makeText(applicationContext, R.string.success_add_category, Toast.LENGTH_LONG)
+                    Toast.makeText(
+                        applicationContext,
+                        R.string.success_add_category,
+                        Toast.LENGTH_LONG
+                    )
                         .show()
 
                     addEditViewModel.getCategories()
@@ -182,15 +186,16 @@ class AddEditTaskFragment : Fragment() {
         private const val TASK_ID = "task_id"
 
         @JvmStatic
-        fun newInstance(taskAction: TaskAction, token: String?, taskId: Int? = null) = AddEditTaskFragment().apply {
-            val args = Bundle().apply {
-                putString(TOKEN, token)
-                putSerializable(TASK_ACTION, taskAction)
+        fun newInstance(taskAction: TaskAction, token: String?, taskId: Int? = null) =
+            AddEditTaskFragment().apply {
+                val args = Bundle().apply {
+                    putString(TOKEN, token)
+                    putSerializable(TASK_ACTION, taskAction)
 
-                if (taskId != null) putInt(TASK_ID, taskId)
+                    if (taskId != null) putInt(TASK_ID, taskId)
+                }
+
+                arguments = args
             }
-
-            arguments = args
-        }
     }
 }
