@@ -16,7 +16,10 @@ class CreateTaskUseCase(
         val tempToken = token ?: return
         val tempTask = task ?: return
 
-        networkRepository.createTask(tempToken, tempTask)
-        dbRepository.addTask(tempTask)
+        val response = networkRepository.createTask(tempToken, tempTask)
+
+        if (response == null) {
+            dbRepository.addTask(tempTask)
+        }
     }
 }

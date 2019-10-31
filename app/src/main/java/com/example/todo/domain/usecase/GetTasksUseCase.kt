@@ -4,7 +4,6 @@ import com.example.todo.domain.entity.Task
 import com.example.todo.domain.repository.IDbRepository
 import com.example.todo.domain.repository.INetworkRepository
 import com.example.todo.domain.usecase.common.UseCase
-import com.example.todo.domain.utils.CompareUtil
 
 class GetTasksUseCase(
     private val networkRepository: INetworkRepository,
@@ -23,6 +22,8 @@ class GetTasksUseCase(
             return dbData
         }
 
+        dbRepository.clearTasks()
+
         if (dbData.isEmpty()) {
             netData.forEach {
                 dbRepository.addTask(it)
@@ -31,40 +32,16 @@ class GetTasksUseCase(
             return netData
         }
 
-        if (netData.isEmpty()) {
-            dbData.forEach {
-                dbRepository.deleteTask(it)
-            }
-
-            return emptyList()
-        }
+        data.addAll(netData)
 
         netData.forEach { netTask ->
-            val dbTask = dbData.find { it.id == netTask.id }
-            dbData.remove(dbTask)
-
-            if (dbTask == null) {
-                dbRepository.addTask(netTask)
-            } else if (CompareUtil.compareTask(netTask, dbTask)) {
-                if (netTask.synchronized != dbTask.synchronized) {
-                    dbTask.synchronized = true
-                    dbRepository.updateTask(dbTask)
-                }
-            } else {
-                if (!dbTask.synchronized) {
-                    networkRepository.updateTask(tempToken, dbTask)
-                } else dbRepository.updateTask(netTask)
-            }
-
-            data.add(netTask)
+            dbRepository.addTask(netTask)
         }
 
-        dbData.forEach {
-            if (!it.synchronized) {
-                networkRepository.createTask(tempToken, it)
-                data.add(it)
-            }
-        }
+        /*dbData.filter { !it.synchronized }.forEach {
+            networkRepository.createTask(tempToken, it)
+            data.add(it)
+        }*/
 
         return data
     }

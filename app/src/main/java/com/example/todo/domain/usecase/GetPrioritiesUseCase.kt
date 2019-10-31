@@ -17,8 +17,6 @@ class GetPrioritiesUseCase(
         val netData = networkRepository.getPriorities(tempToken)
         val dbData = dbRepository.getPriorities()
 
-        println(dbData)
-
         if (netData == null) {
             return dbData
         }

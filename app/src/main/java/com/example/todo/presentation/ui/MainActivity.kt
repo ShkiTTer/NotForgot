@@ -52,12 +52,14 @@ class MainActivity : AppCompatActivity() {
         setupListAdapter()
         initObserver()
 
-        binding.refresh.setColorSchemeColors(
-            getColor(R.color.colorAccent)
-        )
+        binding.refresh.apply {
+            setColorSchemeColors(
+                getColor(R.color.colorAccent)
+            )
 
-        binding.refresh.setOnRefreshListener {
-            mainViewModel.getTasks()
+            setOnRefreshListener {
+                mainViewModel.getTasks()
+            }
         }
     }
 

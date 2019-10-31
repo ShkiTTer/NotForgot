@@ -23,7 +23,7 @@ class GetCategoriesUseCase(
 
         netData.forEach { netCategory ->
             val dbCategory = dbData.find { it.id == netCategory.id }
-            dbData.remove(dbCategory)
+
 
             if (dbCategory == null) dbRepository.addCategory(netCategory)
             else if (CompareUtil.compareCategory(netCategory, dbCategory)) {
@@ -41,6 +41,7 @@ class GetCategoriesUseCase(
             }
 
             data.add(netCategory)
+            dbData.remove(dbCategory)
         }
 
         dbData.forEach {

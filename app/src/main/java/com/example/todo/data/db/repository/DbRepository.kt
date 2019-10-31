@@ -50,7 +50,11 @@ class DbRepository(
         categoryDao.update(DbMapper.categoryToDb(category))
     }
 
-    override suspend fun clearData() {
+    override suspend fun clearTasks() {
+        taskDao.clear()
+    }
+
+    override suspend fun clearAll() {
         taskDao.clear()
         categoryDao.clear()
         priorityDao.clear()

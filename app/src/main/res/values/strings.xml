@@ -39,4 +39,7 @@
     <string name="task_not_done">Не выполнено</string>
 
     <string name="synchronize">Синхронизация данных…</string>
+    <string name="dialog_save_message">Сохранить?</string>
+    <string name="dialog_save_positive_btn">Да!</string>
+    <string name="dialog_save_negative_btn">Отмена</string>
 </resources>

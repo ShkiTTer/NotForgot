@@ -17,7 +17,7 @@ class MainViewModel(
     private val updateTaskUseCase: UpdateTaskUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
     private val clearDataUseCase: ClearDataUseCase,
-    private val networkStateUtil: NetworkStateUtil
+    networkStateUtil: NetworkStateUtil
 ) : ViewModel() {
     val taskList = MutableLiveData<List<ListItem>>()
     var token: String? = null

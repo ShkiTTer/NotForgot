@@ -30,6 +30,8 @@ class AddEditViewModel(
     val categories = MutableLiveData<List<com.example.todo.presentation.entity.Category>>()
     val priorities = MutableLiveData<List<Priority>>()
 
+    fun validatedTask(): Boolean = TaskFormValidate.validateTask(task.value ?: Task())
+
     fun getCategories() {
         getCategoriesUseCase.apply {
             token = this@AddEditViewModel.token
@@ -65,7 +67,7 @@ class AddEditViewModel(
     fun createTask() {
         val tempTask = task.value ?: return
 
-        if (TaskFormValidate.validateTask(tempTask)) {
+        if (validatedTask()) {
             createTaskUseCase.apply {
                 token = this@AddEditViewModel.token
                 task = PresentationMapper.taskToModel(tempTask)
@@ -108,7 +110,7 @@ class AddEditViewModel(
     fun updateTask() {
         val task = this@AddEditViewModel.task.value ?: return
 
-        if (TaskFormValidate.validateTask(task)) {
+        if (validatedTask()) {
             updateTaskUseCase.apply {
                 this.token = this@AddEditViewModel.token
                 this.task = PresentationMapper.taskToModel(task)

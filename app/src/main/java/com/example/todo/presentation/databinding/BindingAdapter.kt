@@ -39,12 +39,14 @@ object BindingAdapter {
     ) {
         if (categories == null) return
 
-        spinner.adapter = CategoryAdapter(spinner.context, R.layout.item_spinner, categories)
+        if (spinner.adapter == null)
+            spinner.adapter = CategoryAdapter(spinner.context, R.layout.item_spinner, categories)
+
+        setSpinnerListener(spinner, listener)
 
         if (category == null) return
 
         setCurrentSelection(spinner, category)
-        setSpinnerListener(spinner, listener)
     }
 
     @JvmStatic
@@ -67,13 +69,15 @@ object BindingAdapter {
     ) {
         if (priorities == null) return
 
-        spinner.adapter =
-            PriorityAdapter(spinner.context, R.layout.item_spinner, priorities)
+        if (spinner.adapter == null)
+            spinner.adapter =
+                PriorityAdapter(spinner.context, R.layout.item_spinner, priorities)
+
+        setSpinnerListener(spinner, listener)
 
         if (priority == null) return
 
         setCurrentSelection(spinner, priority)
-        setSpinnerListener(spinner, listener)
     }
 
     @JvmStatic

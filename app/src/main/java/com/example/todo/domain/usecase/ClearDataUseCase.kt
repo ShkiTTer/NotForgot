@@ -10,6 +10,6 @@ class ClearDataUseCase(
 ) : UseCase<Unit>() {
     override suspend fun doInBackground() {
         localRepository.removeToken()
-        dbRepository.clearData()
+        dbRepository.clearAll()
     }
 }

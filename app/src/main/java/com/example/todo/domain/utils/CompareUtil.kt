@@ -5,8 +5,7 @@ import com.example.todo.domain.entity.Task
 
 object CompareUtil {
     fun compareTask(netTask: Task, dbTask: Task): Boolean =
-        netTask.id == dbTask.id
-                && netTask.description == dbTask.description
+        netTask.description == dbTask.description
                 && netTask.created == dbTask.created
                 && netTask.deadline == dbTask.deadline
                 && netTask.done == dbTask.done
@@ -16,4 +15,7 @@ object CompareUtil {
     fun compareCategory(netCategory: Category, dbCategory: Category): Boolean =
         netCategory.id == dbCategory.id
                 && netCategory.name == dbCategory.name
+
+    fun compareTaskId(netTask: Task, dbTask: Task): Boolean =
+        netTask.id == dbTask.id
 }

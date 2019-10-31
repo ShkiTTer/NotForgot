@@ -5,6 +5,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -27,6 +28,7 @@ class AddEditTaskFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
 
         val args = arguments ?: return
 
@@ -52,6 +54,10 @@ class AddEditTaskFragment : Fragment() {
             priorities = addEditViewModel.priorities
         }
 
+        addEditViewModel.task.observeForever {
+            println(it)
+        }
+
         setupClickListeners()
 
         addEditViewModel.getCategories()
@@ -62,6 +68,42 @@ class AddEditTaskFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            if (addEditViewModel.validatedTask()) {
+                createSaveDialog()?.show()
+            }
+
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun createSaveDialog(): AlertDialog? {
+        val context = this.context ?: return null
+
+        return AlertDialog.Builder(context)
+            .setView(R.layout.dialog_save)
+            .setPositiveButton(R.string.dialog_save_positive_btn) { _, _ ->
+                if (addEditViewModel.taskAction == TaskAction.EDIT)
+                    addEditViewModel.updateTask()
+                else addEditViewModel.createTask()
+
+                val manager = fragmentManager ?: return@setPositiveButton
+
+                if (manager.backStackEntryCount > 0) manager.popBackStack()
+                else activity?.finish()
+            }
+            .setNegativeButton(R.string.dialog_save_negative_btn) { _, _ ->
+                val manager = fragmentManager ?: return@setNegativeButton
+
+                if (manager.backStackEntryCount > 0) manager.popBackStack()
+                else activity?.finish()
+            }
+            .create()
     }
 
     private fun setupClickListeners() {
