@@ -14,6 +14,6 @@ data class Task(
     @Embedded var category: Category = Category(),
     @Embedded var priority: Priority = Priority(),
     var done: Int = 0,
-    var synchronized: Boolean = false,
+    var taskSynchronized: Boolean = false,
     @PrimaryKey(autoGenerate = true) var task_id: Int = 0
 )

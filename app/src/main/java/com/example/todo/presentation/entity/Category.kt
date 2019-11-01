@@ -7,7 +7,8 @@ import com.example.todo.presentation.interfaces.ListItem
 
 data class Category(
     var id: Int = 0,
-    private var _name: String = ""
+    private var _name: String = "",
+    var synchronized: Boolean = false
 ) : BaseObservable(), ListItem {
     var name: String
         @Bindable get() = _name

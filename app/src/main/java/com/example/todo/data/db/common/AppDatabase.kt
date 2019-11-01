@@ -9,10 +9,10 @@ import com.example.todo.data.db.dao.TaskDao
 import com.example.todo.data.db.entity.Category
 import com.example.todo.data.db.entity.Priority
 import com.example.todo.data.db.entity.Task
-import com.example.todo.data.db.mapper.DateConventer
+import com.example.todo.data.db.mapper.DateConverter
 
-@Database(entities = [Task::class, Category::class, Priority::class], version = 2)
-@TypeConverters(DateConventer::class)
+@Database(entities = [Task::class, Category::class, Priority::class], version = 3)
+@TypeConverters(DateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun getTaskDao(): TaskDao
     abstract fun getCategoryDao(): CategoryDao

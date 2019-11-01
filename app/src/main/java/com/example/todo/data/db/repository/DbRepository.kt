@@ -54,6 +54,10 @@ class DbRepository(
         taskDao.clear()
     }
 
+    override suspend fun clearCategories() {
+        categoryDao.clear()
+    }
+
     override suspend fun clearAll() {
         taskDao.clear()
         categoryDao.clear()

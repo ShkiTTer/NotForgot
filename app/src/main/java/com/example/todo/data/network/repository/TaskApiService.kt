@@ -25,7 +25,7 @@ interface TaskApiService {
 
     @Headers("Accept: application/json")
     @GET("categories")
-    fun getCategories(@Header("Authorization") token: String): Call<List<Category>>
+    fun getCategories(@Header("Authorization") token: String): Call<List<com.example.todo.data.network.entity.Category>>
 
     @Headers("Accept: application/json")
     @GET("priorities")
@@ -33,7 +33,7 @@ interface TaskApiService {
 
     @Headers("Accept: application/json")
     @POST("tasks")
-    fun createTask(@Header("Authorization") token: String, @Body task: NewTask): Call<Unit>
+    fun createTask(@Header("Authorization") token: String, @Body task: NewTask): Call<Task>
 
     @Headers("Accept: application/json")
     @PATCH("tasks/{id}")

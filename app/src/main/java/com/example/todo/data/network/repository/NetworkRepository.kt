@@ -2,9 +2,9 @@ package com.example.todo.data.network.repository
 
 import com.example.todo.data.network.NetworkConstants
 import com.example.todo.data.network.mapper.NetworkMapper
-import com.example.todo.domain.utils.NetworkStateUtil
 import com.example.todo.domain.entity.*
 import com.example.todo.domain.repository.INetworkRepository
+import com.example.todo.domain.utils.NetworkStateUtil
 import retrofit2.await
 
 class NetworkRepository(
@@ -39,7 +39,9 @@ class NetworkRepository(
 
     override suspend fun getCategories(token: String): List<Category>? {
         return if (networkStateUtil.isOnline)
-            taskApiService.getCategories("${NetworkConstants.TOKEN_HEADER} $token").await()
+            taskApiService.getCategories("${NetworkConstants.TOKEN_HEADER} $token").await().map {
+                NetworkMapper.categoryToModel(it)
+            }
         else null
     }
 
@@ -51,12 +53,12 @@ class NetworkRepository(
     }
 
 
-    override suspend fun createTask(token: String, task: Task): Unit? {
+    override suspend fun createTask(token: String, task: Task): Int? {
         return if (networkStateUtil.isOnline)
             taskApiService.createTask(
                 "${NetworkConstants.TOKEN_HEADER} $token",
                 NetworkMapper.newTask(task)
-            ).await()
+            ).await().id
         else null
     }
 

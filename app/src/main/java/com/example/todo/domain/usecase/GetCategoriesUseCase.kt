@@ -15,40 +15,20 @@ class GetCategoriesUseCase(
     override suspend fun doInBackground(): List<Category>? {
         val tempToken = token ?: return null
 
-        val netData = networkRepository.getCategories(tempToken)
         val dbData = dbRepository.getCategories().toMutableList()
         val data = mutableListOf<Category>()
 
-        if (netData == null) return dbData
-
-        netData.forEach { netCategory ->
-            val dbCategory = dbData.find { it.id == netCategory.id }
-
-
-            if (dbCategory == null) dbRepository.addCategory(netCategory)
-            else if (CompareUtil.compareCategory(netCategory, dbCategory)) {
-                if (netCategory.synchronized != dbCategory.synchronized)
-                {
-                    dbCategory.synchronized = true
-                    dbRepository.updateCategory(dbCategory)
-                }
-            }
-            else {
-                if (!dbCategory.synchronized) {
-                    networkRepository.createCategory(tempToken, dbCategory)
-                }
-                else dbRepository.updateCategory(netCategory)
-            }
-
-            data.add(netCategory)
-            dbData.remove(dbCategory)
+        dbData.filter { !it.synchronized }.forEach {
+            networkRepository.createCategory(tempToken, it)
         }
 
-        dbData.forEach {
-            if (!it.synchronized) {
-                networkRepository.createCategory(tempToken, it)
-                data.add(it)
-            }
+        val netData = networkRepository.getCategories(tempToken) ?: return dbData
+
+        dbRepository.clearCategories()
+
+        netData.forEach { netCategory ->
+            dbRepository.addCategory(netCategory)
+            data.add(netCategory)
         }
 
         return data

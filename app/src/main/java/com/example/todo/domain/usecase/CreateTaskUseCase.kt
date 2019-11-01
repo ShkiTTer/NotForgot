@@ -18,8 +18,10 @@ class CreateTaskUseCase(
 
         val response = networkRepository.createTask(tempToken, tempTask)
 
-        if (response == null) {
-            dbRepository.addTask(tempTask)
+        if (response != null) {
+            tempTask.synchronized = true
         }
+
+        dbRepository.addTask(tempTask)
     }
 }

@@ -16,10 +16,10 @@ class CreateCategoryUseCase(
         val tempToken = token ?: return
         val tempCategory = category ?: return
 
-        val netData = networkRepository.createCategory(tempToken, tempCategory)
+        val response = networkRepository.createCategory(tempToken, tempCategory)
 
-        if (netData == null) {
-            tempCategory.synchronized = false
+        if (response != null) {
+            tempCategory.synchronized = true
         }
 
         dbRepository.addCategory(tempCategory)

@@ -1,6 +1,5 @@
 package com.example.todo.data.network.entity
 
-import com.example.todo.domain.entity.Category
 import com.example.todo.domain.entity.Priority
 
 data class Task(

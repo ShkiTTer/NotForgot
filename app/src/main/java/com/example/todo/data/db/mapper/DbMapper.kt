@@ -15,7 +15,7 @@ object DbMapper {
             priorityToModel(task.priority),
             categoryToModel(task.category),
             task.task_id,
-            task.synchronized
+            task.taskSynchronized
         )
 
     fun categoryToModel(category: Category): com.example.todo.domain.entity.Category =

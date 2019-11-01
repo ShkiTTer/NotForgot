@@ -1,5 +1,6 @@
 package com.example.todo.data.network.mapper
 
+import com.example.todo.data.network.entity.Category
 import com.example.todo.data.network.entity.NewTask
 import com.example.todo.data.network.entity.RegisterUser
 import com.example.todo.data.network.entity.UserToken
@@ -39,8 +40,11 @@ object NetworkMapper {
                 Date(it.created),
                 it.deadline?.let { dateLong -> Date(dateLong) },
                 it.priority,
-                it.category,
+                categoryToModel(it.category),
                 it.id
             )
         }
+
+    fun categoryToModel(category: Category): com.example.todo.domain.entity.Category =
+        com.example.todo.domain.entity.Category(category.id, category.name)
 }

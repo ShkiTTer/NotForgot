@@ -19,5 +19,6 @@ interface IDbRepository {
     suspend fun replacePriorities(priorities: List<Priority>)
 
     suspend fun clearTasks()
+    suspend fun clearCategories()
     suspend fun clearAll()
 }

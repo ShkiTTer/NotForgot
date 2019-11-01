@@ -8,7 +8,7 @@ import com.example.todo.presentation.interfaces.ListItem
 
 object PresentationMapper {
     private fun categoryToPresentation(category: com.example.todo.domain.entity.Category): Category =
-        Category(category.id, category.name)
+        Category(category.id, category.name, category.synchronized)
 
     fun newUserFromPresentation(newUser: NewUser): com.example.todo.domain.entity.NewUser =
         com.example.todo.domain.entity.NewUser(
@@ -56,7 +56,7 @@ object PresentationMapper {
         )
 
     fun categoryToModel(category: Category): com.example.todo.domain.entity.Category =
-        com.example.todo.domain.entity.Category(category.id, category.name)
+        com.example.todo.domain.entity.Category(category.id, category.name, category.synchronized)
 
     fun taskToPresentation(task: Task): com.example.todo.presentation.entity.Task =
         com.example.todo.presentation.entity.Task(
