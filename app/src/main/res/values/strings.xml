@@ -44,4 +44,9 @@
     <string name="dialog_save_negative_btn">Отмена</string>
 
     <string name="title_edit_task">Изменить задачу</string>
+    <string name="title_error_dialog">Ошибка</string>
+    <string name="message_login_error">Ошибка авторизации. Проверьте введенные данные или повторите позже!</string>
+    <string name="message_registration_error">Ошибка регистрации. Повторите позже!</string>
+    <string name="message_no_internet">Отсутствует интернет-соединение. Авторизация и регистрация будут недоступны!</string>
+    <string name="neutral_button_error_dialog">Ок</string>
 </resources>

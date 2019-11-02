@@ -6,6 +6,7 @@ import com.example.todo.domain.entity.UserToken
 import com.example.todo.domain.usecase.RegisterUseCase
 import com.example.todo.domain.usecase.SaveTokenUseCase
 import com.example.todo.domain.usecase.common.UseCase
+import com.example.todo.domain.utils.NetworkStateUtil
 import com.example.todo.presentation.common.ObservableLiveData
 import com.example.todo.presentation.entity.NewUser
 import com.example.todo.presentation.mapper.PresentationMapper
@@ -13,7 +14,8 @@ import com.example.todo.presentation.utils.RegistrationFormValidate
 
 class RegisterViewModel(
     private val registerUseCase: RegisterUseCase,
-    private val saveTokenUseCase: SaveTokenUseCase
+    private val saveTokenUseCase: SaveTokenUseCase,
+    private val networkStateUtil: NetworkStateUtil
 ) : ViewModel() {
     val newUser = ObservableLiveData(NewUser())
     val userToken = MutableLiveData<UserToken>()
@@ -25,6 +27,8 @@ class RegisterViewModel(
             isValidated = RegistrationFormValidate.validateForm(it)
         }
     }
+
+    fun isOnline(): Boolean = networkStateUtil.isOnline()
 
     fun registerUser() {
         val userData = newUser.value ?: return

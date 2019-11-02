@@ -1,12 +1,14 @@
 package com.example.todo.presentation.ui
 
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.example.todo.R
@@ -22,6 +24,10 @@ class RegistrationFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!registerViewModel.isOnline()) {
+            showError(R.string.message_no_internet)
+        }
     }
 
     override fun onCreateView(
@@ -41,9 +47,16 @@ class RegistrationFragment : Fragment() {
         return binding.root
     }
 
-    private fun showError() {
-
+    private fun showError(@StringRes errorMessage: Int) {
+        createErrorDialog(errorMessage).show()
     }
+
+    private fun createErrorDialog(@StringRes errorMessage: Int): AlertDialog =
+        AlertDialog.Builder(activity)
+            .setTitle(R.string.title_error_dialog)
+            .setMessage(errorMessage)
+            .setNeutralButton(R.string.neutral_button_error_dialog, null)
+            .create()
 
     private fun initObservers() {
         registerViewModel.userToken.observe(viewLifecycleOwner, Observer {
@@ -58,7 +71,7 @@ class RegistrationFragment : Fragment() {
                 activity?.finish()
             }
             else {
-                showError()
+                showError(R.string.message_registration_error)
             }
         })
     }

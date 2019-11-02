@@ -52,8 +52,8 @@ class TodoApp : Application() {
 
         single { TaskListAdapter() }
 
-        viewModel { RegisterViewModel(get(), get()) }
-        viewModel { LoginViewModel(get(), get()) }
+        viewModel { RegisterViewModel(get(), get(), get()) }
+        viewModel { LoginViewModel(get(), get(), get()) }
         viewModel { AutoLoginViewModel(get()) }
         viewModel { MainViewModel(get(), get(), get(), get(), get()) }
         viewModel { AddEditViewModel(get(), get(), get(), get(), get(), get()) }

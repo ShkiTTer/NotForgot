@@ -7,5 +7,5 @@ class NetworkStateUtil(context: Context) {
     private val service =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-    val isOnline = service.activeNetwork != null
+    fun isOnline(): Boolean = service.activeNetwork != null
 }

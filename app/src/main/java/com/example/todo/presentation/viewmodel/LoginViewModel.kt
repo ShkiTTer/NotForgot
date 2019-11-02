@@ -6,16 +6,20 @@ import com.example.todo.domain.entity.UserToken
 import com.example.todo.domain.usecase.LoginUseCase
 import com.example.todo.domain.usecase.SaveTokenUseCase
 import com.example.todo.domain.usecase.common.UseCase
+import com.example.todo.domain.utils.NetworkStateUtil
 import com.example.todo.presentation.common.ObservableLiveData
 import com.example.todo.presentation.entity.LoginUser
 import com.example.todo.presentation.mapper.PresentationMapper
 
 class LoginViewModel(
     private val loginUseCase: LoginUseCase,
-    private val saveTokenUseCase: SaveTokenUseCase
+    private val saveTokenUseCase: SaveTokenUseCase,
+    private val networkStateUtil: NetworkStateUtil
 ) : ViewModel() {
     val userToken = MutableLiveData<UserToken>()
     val loginUser = ObservableLiveData(LoginUser())
+
+    fun isOnline(): Boolean = networkStateUtil.isOnline()
 
     fun login() {
         val userData = loginUser.value ?: return

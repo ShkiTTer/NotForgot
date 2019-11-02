@@ -17,13 +17,11 @@ class MainViewModel(
     private val updateTaskUseCase: UpdateTaskUseCase,
     private val deleteTaskUseCase: DeleteTaskUseCase,
     private val clearDataUseCase: ClearDataUseCase,
-    networkStateUtil: NetworkStateUtil
+    private val networkStateUtil: NetworkStateUtil
 ) : ViewModel() {
     val taskList = MutableLiveData<List<ListItem>>()
     var token: String? = null
     val tasks = MutableLiveData<List<Task>>()
-
-    val isNetworkEnabled = networkStateUtil.isOnline
 
     init {
         tasks.observeForever {
@@ -35,6 +33,8 @@ class MainViewModel(
             taskList.value = PresentationMapper.taskListToPresentation(it)
         }
     }
+
+    fun isNetworkEnabled(): Boolean = networkStateUtil.isOnline()
 
     fun getTasks() {
         getTasksUseCase.apply {

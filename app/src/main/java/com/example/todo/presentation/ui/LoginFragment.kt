@@ -1,11 +1,13 @@
 package com.example.todo.presentation.ui
 
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.StringRes
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -22,6 +24,10 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (!loginViewModel.isOnline()) {
+            showError(R.string.message_no_internet)
+        }
     }
 
     override fun onCreateView(
@@ -66,14 +72,22 @@ class LoginFragment : Fragment() {
                 activity?.finish()
             }
             else {
-                showError()
+                showError(R.string.message_login_error)
             }
         })
     }
 
-    private fun showError() {
-
+    private fun showError(@StringRes errorMessage: Int) {
+        createErrorDialog(errorMessage).show()
     }
+
+    private fun createErrorDialog(@StringRes errorMessage: Int): AlertDialog =
+        AlertDialog.Builder(activity)
+            .setTitle(R.string.title_error_dialog)
+            .setMessage(errorMessage)
+            .setNeutralButton(R.string.neutral_button_error_dialog, null)
+            .create()
+
 
     companion object {
 

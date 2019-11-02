@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             tasks = mainViewModel.taskList
         }
 
-        if (mainViewModel.isNetworkEnabled) {
+        if (mainViewModel.isNetworkEnabled()) {
             synchronizedDialog = createSynchronizedDialog()
             synchronizedDialog?.show()
         }
