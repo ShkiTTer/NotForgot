@@ -50,12 +50,9 @@
             app:layout_constraintTop_toBottomOf="@+id/textView11">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/BasicInputField"
                 android:hint="@string/hint_mail"
                 android:inputType="textEmailAddress"
-                android:paddingStart="8dp"
-                android:singleLine="true"
                 android:text="@={loginUser.email}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -77,12 +74,9 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/BasicInputField"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
-                android:paddingStart="8dp"
-                android:singleLine="true"
                 android:text="@={loginUser.password}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
