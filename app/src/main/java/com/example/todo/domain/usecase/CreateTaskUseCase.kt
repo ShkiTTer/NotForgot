@@ -20,6 +20,7 @@ class CreateTaskUseCase(
 
         if (response != null) {
             tempTask.synchronized = true
+            tempTask.id = response
         }
 
         dbRepository.addTask(tempTask)

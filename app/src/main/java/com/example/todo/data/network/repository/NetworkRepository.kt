@@ -55,10 +55,13 @@ class NetworkRepository(
 
     override suspend fun createTask(token: String, task: Task): Int? {
         return if (networkStateUtil.isOnline)
+        {
+            val newTask = NetworkMapper.newTask(task)
             taskApiService.createTask(
                 "${NetworkConstants.TOKEN_HEADER} $token",
-                NetworkMapper.newTask(task)
+                newTask
             ).await().id
+        }
         else null
     }
 
