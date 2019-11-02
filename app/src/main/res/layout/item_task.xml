@@ -65,6 +65,7 @@
             android:checked="@={task.done}"
             android:enabled="@{!task.done}"
             android:text=""
+            android:buttonTint="@color/checkbox_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

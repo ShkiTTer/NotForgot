@@ -2,6 +2,7 @@ package com.example.todo.presentation.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -22,6 +23,7 @@ class TaskInfoFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
 
         taskInfoViewModel.taskId = arguments?.getInt(TASK_ID)
     }
@@ -49,6 +51,15 @@ class TaskInfoFragment : Fragment() {
             delay(200)
             taskInfoViewModel.getTask()
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            activity?.finish()
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     private fun setupClickListeners() {

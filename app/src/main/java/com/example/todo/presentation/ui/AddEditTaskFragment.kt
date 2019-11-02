@@ -76,11 +76,19 @@ class AddEditTaskFragment : Fragment() {
             if (addEditViewModel.validatedTask()) {
                 createSaveDialog()?.show()
             }
+            else closeFragment()
 
             return true
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun closeFragment() {
+        val manager = fragmentManager ?: return
+
+        if (manager.backStackEntryCount > 0) manager.popBackStack()
+        else activity?.finish()
     }
 
     private fun createSaveDialog(): AlertDialog? {
@@ -93,16 +101,10 @@ class AddEditTaskFragment : Fragment() {
                     addEditViewModel.updateTask()
                 else addEditViewModel.createTask()
 
-                val manager = fragmentManager ?: return@setPositiveButton
-
-                if (manager.backStackEntryCount > 0) manager.popBackStack()
-                else activity?.finish()
+                closeFragment()
             }
             .setNegativeButton(R.string.dialog_save_negative_btn) { _, _ ->
-                val manager = fragmentManager ?: return@setNegativeButton
-
-                if (manager.backStackEntryCount > 0) manager.popBackStack()
-                else activity?.finish()
+                closeFragment()
             }
             .create()
     }
