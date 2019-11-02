@@ -97,10 +97,7 @@ class AddEditTaskFragment : Fragment() {
         return AlertDialog.Builder(context)
             .setView(R.layout.dialog_save)
             .setPositiveButton(R.string.dialog_save_positive_btn) { _, _ ->
-                if (addEditViewModel.taskAction == TaskAction.EDIT)
-                    addEditViewModel.updateTask()
-                else addEditViewModel.createTask()
-
+                saveTask()
                 closeFragment()
             }
             .setNegativeButton(R.string.dialog_save_negative_btn) { _, _ ->
@@ -109,24 +106,25 @@ class AddEditTaskFragment : Fragment() {
             .create()
     }
 
+    private fun saveTask() {
+        Toast.makeText(applicationContext, R.string.success_add_task, Toast.LENGTH_LONG)
+            .show()
+
+        if (addEditViewModel.taskAction == TaskAction.EDIT) {
+            addEditViewModel.updateTask()
+        } else {
+            addEditViewModel.createTask()
+        }
+    }
+
     private fun setupClickListeners() {
         binding.deadline.setOnClickListener {
             createDatePickerDialog().show()
         }
 
         binding.btnSaveTask.setOnClickListener {
-            Toast.makeText(applicationContext, R.string.success_add_task, Toast.LENGTH_LONG)
-                .show()
-
-            if (addEditViewModel.taskAction == TaskAction.EDIT) {
-                addEditViewModel.updateTask()
-
-                fragmentManager?.popBackStack()
-            } else {
-                addEditViewModel.createTask()
-
-                this.activity?.finish()
-            }
+            saveTask()
+            closeFragment()
         }
 
         binding.ivAddCategory.setOnClickListener {
